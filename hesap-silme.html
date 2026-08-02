@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hesap ve veri silme — Stuxio</title>
+<meta name="description" content="Stuxio hesabınızı ve verilerinizi nasıl silersiniz: uygulama içinden adım adım silme, e-posta ile talep, silinen ve saklanan veriler.">
+<link rel="canonical" href="https://stuxio.net/hesap-silme.html">
+<meta name="theme-color" content="#06070b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f8fc" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f8cff'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ccircle cx='16' cy='17' r='8' fill='none' stroke='white' stroke-width='2.4'/%3E%3Cpath d='M16 13v4.4l2.8 1.8' stroke='white' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3Cpath d='M12.5 5h7' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="container inner">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Stuxio</span></a>
+    <div class="lang-switch" role="tablist" aria-label="Dil / Language">
+      <button role="tab" data-set-lang="tr" aria-selected="true">Türkçe</button>
+      <button role="tab" data-set-lang="en" aria-selected="false">English</button>
+    </div>
+  </div>
+</header>
+
+<main class="container doc">
+
+<!-- ══════════════════ TÜRKÇE ══════════════════ -->
+<div data-lang="tr" class="is-active">
+  <h1>Hesap ve veri silme</h1>
+  <p class="updated">Uygulama: Stuxio · Son güncelleme: 2 Ağustos 2026</p>
+
+  <p>Stuxio hesabınızı ve hesabınıza bağlı verileri istediğiniz zaman kalıcı olarak
+  silebilirsiniz. İki yol vardır; ikisi de aynı sonucu verir.</p>
+
+  <h2>Yol 1 — Uygulama içinden (önerilen, anında)</h2>
+  <ol>
+    <li>Stuxio uygulamasını açın ve hesabınıza giriş yapın.</li>
+    <li>Üst çubuktaki <strong>ayarlar</strong> (⚙) simgesine dokunun.</li>
+    <li>Ayarlar ekranının en üstündeki <strong>profil kartına</strong> dokunarak <strong>Profilim</strong> sayfasını açın.</li>
+    <li>Sayfanın altındaki <strong>Hesabı Sil</strong> bölümünde <strong>Hesabımı Sil</strong> düğmesine dokunun.</li>
+    <li>Açılan uyarıyı okuyup işlemi onaylayın.</li>
+  </ol>
+  <p>Onayladığınız anda hesabınız ve içerik verileriniz silinir, uygulama sizi giriş
+  ekranına döndürür. İşlem geri alınamaz.</p>
+
+  <h2>Yol 2 — E-posta ile talep</h2>
+  <p>Uygulamaya erişemiyorsanız (örneğin uygulamayı kaldırdıysanız veya giriş
+  yapamıyorsanız) silme talebinizi e-posta ile iletebilirsiniz:</p>
+  <div class="callout">
+    <p><strong>Alıcı:</strong> <a href="mailto:destek@stuxio.net?subject=Hesap%20silme%20talebi">destek@stuxio.net</a><br>
+    <strong>Konu:</strong> Hesap silme talebi<br>
+    <strong>İçerik:</strong> Hesabınıza ait e-posta adresi</p>
+  </div>
+  <p>Talebi <strong>hesabınızın kayıtlı e-posta adresinden</strong> göndermeniz gerekir;
+  bu, talebin gerçekten hesap sahibinden geldiğini doğrulamamızı sağlar. Talepler en geç
+  <strong>30 gün</strong> içinde sonuçlandırılır ve işlem tamamlandığında size bilgi verilir.</p>
+
+  <h2>Silinen veriler</h2>
+  <p>Hesap silindiğinde aşağıdakiler <strong>kalıcı olarak</strong> silinir:</p>
+  <ul>
+    <li>Çalışma alanlarınız (dersler/projeler)</li>
+    <li>Tüm görevleriniz</li>
+    <li>Tüm çalışma oturumlarınız ve süre kayıtlarınız</li>
+    <li>Uygulama içi bildirimleriniz</li>
+    <li>Varsa destek kayıtlarınız</li>
+    <li>Adınız ve profil bilgileriniz</li>
+    <li>Cihazınızdaki yerel kopya (uygulama silme sırasında temizler)</li>
+  </ul>
+
+  <h2>Saklanan veriler ve süresi</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Veri</th><th>Neden saklanır</th><th>Süre</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Kimliksizleştirilmiş hesap kaydı</td>
+        <td>Hesabın yeniden açılmasını ve mağaza abonelik bildirimlerinin yanlış bir hesaba bağlanmasını önlemek</td>
+        <td>Süresiz — kişisel veri içermez</td>
+      </tr>
+      <tr>
+        <td>Giriş güvenlik kayıtları (IP adresi, olay türü ve zamanı)</td>
+        <td>Kötüye kullanım ve saldırı incelemesi. <strong>E-posta adresi bu kayıtlardan silinir.</strong></td>
+        <td>Sınırlı süre</td>
+      </tr>
+      <tr>
+        <td>Mağaza satın alma kayıtları</td>
+        <td>Apple ve Google'ın kendi sistemlerinde tutulur; bizim erişimimizde değildir</td>
+        <td>İlgili mağazanın politikasına tabidir</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>Aynı e-posta ile yeniden kayıt olabilir misiniz?</strong> Evet. Silinen
+    hesabın e-postasıyla yeni bir hesap açabilirsiniz; bu tamamen yeni ve boş bir hesap
+    olur, eski verileriniz geri gelmez.</p>
+  </div>
+
+  <h2>Aboneliğiniz varsa</h2>
+  <p>Hesabı silmek mağaza aboneliğinizi <strong>otomatik olarak iptal etmez</strong>.
+  Aboneliğinizi ayrıca Apple App Store veya Google Play hesabınızın abonelik ayarlarından
+  iptal etmeniz gerekir.</p>
+
+  <p>Sorularınız için: <a href="mailto:destek@stuxio.net">destek@stuxio.net</a> ·
+  <a href="gizlilik.html">Gizlilik Politikası</a></p>
+</div>
+
+<!-- ══════════════════ ENGLISH ══════════════════ -->
+<div data-lang="en">
+  <h1>Account and data deletion</h1>
+  <p class="updated">App: Stuxio · Last updated: 2 August 2026</p>
+
+  <p>You can permanently delete your Stuxio account and its data at any time. There are two
+  routes; both have the same result.</p>
+
+  <h2>Option 1 — Inside the app (recommended, immediate)</h2>
+  <ol>
+    <li>Open Stuxio and sign in to your account.</li>
+    <li>Tap the <strong>settings</strong> (⚙) icon in the top bar.</li>
+    <li>Tap the <strong>profile card</strong> at the top of the settings screen to open <strong>My Profile</strong>.</li>
+    <li>In the <strong>Delete Account</strong> section at the bottom, tap <strong>Delete My Account</strong>.</li>
+    <li>Read the warning and confirm.</li>
+  </ol>
+  <p>Your account and content are deleted as soon as you confirm, and the app returns you to
+  the sign-in screen. The action cannot be undone.</p>
+
+  <h2>Option 2 — Request by email</h2>
+  <p>If you cannot reach the app (for example you have uninstalled it or cannot sign in),
+  you can request deletion by email:</p>
+  <div class="callout">
+    <p><strong>To:</strong> <a href="mailto:destek@stuxio.net?subject=Account%20deletion%20request">destek@stuxio.net</a><br>
+    <strong>Subject:</strong> Account deletion request<br>
+    <strong>Body:</strong> the email address of your account</p>
+  </div>
+  <p>Please send the request <strong>from the email address registered to the account</strong>
+  so we can confirm it really comes from the account holder. Requests are completed within
+  <strong>30 days</strong> at the latest and you are notified once done.</p>
+
+  <h2>What is deleted</h2>
+  <p>When the account is deleted, the following are removed <strong>permanently</strong>:</p>
+  <ul>
+    <li>Your workspaces (subjects/projects)</li>
+    <li>All of your tasks</li>
+    <li>All study sessions and time records</li>
+    <li>Your in-app notifications</li>
+    <li>Any support records</li>
+    <li>Your name and profile details</li>
+    <li>The local copy on your device (wiped by the app during deletion)</li>
+  </ul>
+
+  <h2>What is kept, and for how long</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Data</th><th>Why it is kept</th><th>Period</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Anonymised account record</td>
+        <td>Prevents the account from being reopened and stops store subscription notices from being attached to the wrong account</td>
+        <td>Indefinite — contains no personal data</td>
+      </tr>
+      <tr>
+        <td>Sign-in security records (IP address, event type and time)</td>
+        <td>Abuse and attack investigation. <strong>The email address is removed from these records.</strong></td>
+        <td>Limited period</td>
+      </tr>
+      <tr>
+        <td>Store purchase records</td>
+        <td>Held in Apple's and Google's own systems, outside our access</td>
+        <td>Subject to that store's policy</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>Can you sign up again with the same email?</strong> Yes. You can create a new
+    account with the deleted account's email; it will be a completely new and empty account
+    and your previous data will not return.</p>
+  </div>
+
+  <h2>If you have a subscription</h2>
+  <p>Deleting your account does <strong>not</strong> automatically cancel a store
+  subscription. You must cancel it separately in your Apple App Store or Google Play
+  subscription settings.</p>
+
+  <p>Questions: <a href="mailto:destek@stuxio.net">destek@stuxio.net</a> ·
+  <a href="gizlilik.html">Privacy Policy</a></p>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <nav class="footer-links" aria-label="Alt menü">
+      <a href="/">Ana sayfa</a>
+      <a href="gizlilik.html">Gizlilik Politikası</a>
+      <a href="kullanim-kosullari.html">Kullanım Koşulları</a>
+      <a href="hesap-silme.html">Hesap ve veri silme</a>
+      <a href="destek.html">Destek</a>
+    </nav>
+    <p class="copyright">© 2026 Stuxio</p>
+  </div>
+</footer>
+
+<script src="assets/lang.js"></script>
+</body>
+</html>

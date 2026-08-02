@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gizlilik Politikası — Stuxio</title>
+<meta name="description" content="Stuxio gizlilik politikası: hangi veriler işlenir, nerede saklanır, kimlerle paylaşılır ve nasıl silinir.">
+<link rel="canonical" href="https://stuxio.net/gizlilik.html">
+<meta name="theme-color" content="#06070b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f8fc" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f8cff'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ccircle cx='16' cy='17' r='8' fill='none' stroke='white' stroke-width='2.4'/%3E%3Cpath d='M16 13v4.4l2.8 1.8' stroke='white' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3Cpath d='M12.5 5h7' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="container inner">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Stuxio</span></a>
+    <div class="lang-switch" role="tablist" aria-label="Dil / Language">
+      <button role="tab" data-set-lang="tr" aria-selected="true">Türkçe</button>
+      <button role="tab" data-set-lang="en" aria-selected="false">English</button>
+    </div>
+  </div>
+</header>
+
+<main class="container doc">
+
+<!-- ══════════════════ TÜRKÇE ══════════════════ -->
+<div data-lang="tr" class="is-active">
+  <h1>Gizlilik Politikası</h1>
+  <p class="updated">Son güncelleme: 2 Ağustos 2026</p>
+
+  <p>Bu politika, <strong>Stuxio</strong> mobil ve masaüstü uygulaması ile
+  <strong>stuxio.net</strong> web sitesinde kişisel verilerin nasıl işlendiğini açıklar.
+  Uygulamayı kullanarak bu politikayı kabul etmiş olursunuz.</p>
+
+  <div class="callout">
+    <p><strong>Kısaca:</strong> Yalnızca uygulamanın çalışması için gereken verileri
+    işliyoruz. Reklam ağı, üçüncü taraf analitik veya izleme aracı kullanmıyoruz.
+    Verilerinizi satmıyoruz. Hesabınızı uygulama içinden kalıcı olarak silebilirsiniz.</p>
+  </div>
+
+  <h2>1. Veri sorumlusu</h2>
+  <p>Stuxio bağımsız bir geliştirici tarafından yürütülmektedir. Gizlilikle ilgili tüm
+  talepleriniz için: <a href="mailto:destek@stuxio.net">destek@stuxio.net</a></p>
+
+  <h2>2. İşlenen veriler</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Veri</th><th>Neden işleniyor</th><th>Kaynak</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>E-posta adresi</td>
+        <td>Hesabın oluşturulması, girişin doğrulanması, şifre sıfırlama ve zorunlu hesap bildirimleri</td>
+        <td>Sizden</td>
+      </tr>
+      <tr>
+        <td>Ad (isteğe bağlı)</td>
+        <td>Uygulama içinde size hitap edebilmek</td>
+        <td>Sizden</td>
+      </tr>
+      <tr>
+        <td>Şifre</td>
+        <td>Girişin doğrulanması. <strong>Şifreniz açık metin olarak saklanmaz</strong>, yalnızca geri döndürülemez özeti (hash) tutulur.</td>
+        <td>Sizden</td>
+      </tr>
+      <tr>
+        <td>Dil tercihi</td>
+        <td>Arayüzün ve size gönderilen e-postaların dilini belirlemek</td>
+        <td>Sizden</td>
+      </tr>
+      <tr>
+        <td>Google hesap kimliği ve doğrulanmış e-posta</td>
+        <td>Yalnızca “Google ile devam et” seçeneğini kullanırsanız; hesabınızı eşleştirmek için</td>
+        <td>Google</td>
+      </tr>
+      <tr>
+        <td>Çalışma içeriğiniz: çalışma alanları, görevler, çalışma oturumları (başlangıç/bitiş/süre), uygulama içi bildirimler</td>
+        <td>Uygulamanın asıl işlevi; istatistik ve ilerleme takibi</td>
+        <td>Sizden</td>
+      </tr>
+      <tr>
+        <td>Cihaz tanımlayıcısı</td>
+        <td>Aynı anda bir telefon ve bir masaüstü oturumu kuralının uygulanması</td>
+        <td>Uygulama tarafından üretilir</td>
+      </tr>
+      <tr>
+        <td>Güvenlik kayıtları: IP adresi, istemci türü, olay türü ve zamanı</td>
+        <td>Giriş denemelerinin izlenmesi, kötüye kullanım ve saldırıların tespiti</td>
+        <td>Otomatik</td>
+      </tr>
+      <tr>
+        <td>Tek kullanımlık doğrulama kodları</td>
+        <td>E-posta doğrulama ve şifre sıfırlama</td>
+        <td>Otomatik</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>İşlemediğimiz veriler</h3>
+  <ul>
+    <li>Konum bilgisi, rehber, fotoğraf, mikrofon veya kamera verisi</li>
+    <li>Reklam kimliği (IDFA / Android Reklam Kimliği)</li>
+    <li>Üçüncü taraf analitik veya davranışsal izleme verisi</li>
+    <li>Ödeme kartı bilgisi — satın alma yapılırsa işlem tamamen Apple veya Google mağazası üzerinden yürür; kart bilgileriniz bize ulaşmaz</li>
+  </ul>
+
+  <h2>3. Cihazınızda saklanan veriler</h2>
+  <p>Uygulama çevrimdışı çalışabilmek için çalışma verilerinizin bir kopyasını cihazınızın
+  kendi uygulama deposunda tutar. Bu kopya cihazdan çıkmaz; yalnızca bağlantı geldiğinde
+  sunucuyla eşitlenir. Oturumu kapattığınızda veya hesabınızı sildiğinizde bu yerel kopya
+  cihazdan temizlenir. Uygulamayı kaldırmanız da yerel kopyayı siler.</p>
+
+  <h2>4. Hukuki dayanak</h2>
+  <ul>
+    <li><strong>Sözleşmenin ifası:</strong> hesap verileri ve çalışma içeriğiniz — bunlar olmadan hizmet sunulamaz.</li>
+    <li><strong>Meşru menfaat:</strong> güvenlik kayıtları — hesabınızı ve altyapıyı kötüye kullanıma karşı korumak.</li>
+    <li><strong>Hukuki yükümlülük:</strong> mevzuatın saklamayı zorunlu kıldığı hâller.</li>
+  </ul>
+
+  <h2>5. Saklama ve konum</h2>
+  <p>Sunucu verileri <strong>Avrupa Birliği'nde (Frankfurt, Almanya)</strong> barındırılan
+  bir PostgreSQL veritabanında saklanır. Aktarım sırasında ve saklama sırasında şifreleme
+  kullanılır.</p>
+  <ul>
+    <li><strong>Hesap ve çalışma verileri:</strong> siz silene ya da hesabınızı kapatana kadar.</li>
+    <li><strong>Güvenlik kayıtları:</strong> kötüye kullanım incelemesi için sınırlı süre saklanır; hesap silindiğinde bu kayıtlardaki e-posta adresi kaldırılır.</li>
+    <li><strong>Doğrulama kodları:</strong> kısa ömürlüdür ve süresi dolduğunda geçersizleşir.</li>
+  </ul>
+
+  <h2>6. Paylaşım</h2>
+  <p>Verilerinizi satmıyoruz ve pazarlama amacıyla üçüncü taraflara vermiyoruz. Hizmeti
+  ayakta tutmak için yalnızca aşağıdaki sağlayıcılardan yararlanıyoruz:</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Sağlayıcı</th><th>Amaç</th><th>Aktarılan veri</th></tr></thead>
+    <tbody>
+      <tr><td>Neon (veritabanı, AB/Frankfurt)</td><td>Verilerin saklanması</td><td>Hesap ve çalışma verileri</td></tr>
+      <tr><td>MonsterASP (uygulama sunucusu)</td><td>API'nin barındırılması</td><td>İstek trafiği</td></tr>
+      <tr><td>Resend</td><td>Doğrulama ve bilgilendirme e-postalarının gönderimi</td><td>E-posta adresi ve ileti içeriği</td></tr>
+      <tr><td>Google</td><td>Yalnızca Google ile giriş kullanılırsa kimlik doğrulama</td><td>Google hesap kimliği, e-posta</td></tr>
+      <tr><td>Cloudflare</td><td>stuxio.net web sitesinin sunulması</td><td>Site ziyaretine ait teknik veriler</td></tr>
+      <tr><td>Apple / Google mağazaları</td><td>Uygulama dağıtımı ve satın alma</td><td>Mağazanın kendi politikası geçerlidir</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Ayrıca yasal bir yükümlülük doğduğunda yetkili makamların usulüne uygun taleplerini
+  karşılamak zorunda kalabiliriz.</p>
+
+  <h2>7. Güvenlik</h2>
+  <ul>
+    <li>Tüm iletişim HTTPS/TLS ile şifrelenir.</li>
+    <li>Şifreler geri döndürülemez biçimde özetlenerek saklanır.</li>
+    <li>Oturumlar kısa ömürlü belirteçlerle yürütülür; art arda hatalı giriş denemesinde hesap geçici olarak kilitlenir.</li>
+    <li>İstek sınırlama ve otomatik hata denetimi uygulanır.</li>
+  </ul>
+  <p>Hiçbir sistem %100 güvenli değildir; verilerinizi etkileyen bir güvenlik olayı
+  yaşanırsa mevzuatın öngördüğü süre içinde bilgilendirilirsiniz.</p>
+
+  <h2>8. Haklarınız</h2>
+  <p>KVKK (6698 sayılı Kanun) ve GDPR kapsamında; verilerinize erişme, düzeltilmesini
+  isteme, silinmesini isteme, işlemenin sınırlandırılmasını isteme, işlemeye itiraz etme ve
+  verilerinizi taşınabilir bir biçimde alma haklarına sahipsiniz.</p>
+  <p>Bu haklarınızı kullanmak için <a href="mailto:destek@stuxio.net">destek@stuxio.net</a>
+  adresine yazmanız yeterlidir; taleplere en geç 30 gün içinde yanıt verilir. Ayrıca
+  bulunduğunuz ülkedeki veri koruma otoritesine şikâyette bulunma hakkınız saklıdır.</p>
+
+  <h2>9. Hesabın silinmesi</h2>
+  <p>Hesabınızı uygulama içinden <strong>Profil → Hesabı sil</strong> adımıyla kendiniz
+  silebilirsiniz. Silme işleminde çalışma alanlarınız, görevleriniz, çalışma oturumlarınız
+  ve bildirimleriniz kalıcı olarak silinir; hesap kaydınız kimliksizleştirilir. Adım adım
+  anlatım ve e-posta yoluyla talep için:
+  <a href="hesap-silme.html">Hesap ve veri silme</a>.</p>
+
+  <h2>10. Çocuklar</h2>
+  <p>Stuxio 13 yaşın altındaki çocuklara yönelik değildir ve bu yaş grubundan bilerek veri
+  toplamayız. Bulunduğunuz ülkede geçerli yaş sınırının altındaysanız uygulamayı yalnızca
+  veli veya vasi onayıyla kullanmalısınız. Böyle bir veriyi öğrenirsek gecikmeksizin
+  sileriz.</p>
+
+  <h2>11. Değişiklikler</h2>
+  <p>Bu politika güncellenebilir. Önemli bir değişiklikte uygulama içinden veya e-posta ile
+  bilgilendirilirsiniz; sayfanın üstündeki tarih her zaman yürürlükteki sürümü gösterir.</p>
+
+  <h2>12. İletişim</h2>
+  <p><a href="mailto:destek@stuxio.net">destek@stuxio.net</a></p>
+</div>
+
+<!-- ══════════════════ ENGLISH ══════════════════ -->
+<div data-lang="en">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 2 August 2026</p>
+
+  <p>This policy explains how personal data is handled in the <strong>Stuxio</strong> mobile
+  and desktop application and on the <strong>stuxio.net</strong> website. By using the app
+  you agree to this policy.</p>
+
+  <div class="callout">
+    <p><strong>In short:</strong> we process only the data the app needs to work. There are
+    no ad networks, no third-party analytics and no tracking tools. We do not sell your
+    data. You can permanently delete your account from inside the app.</p>
+  </div>
+
+  <h2>1. Controller</h2>
+  <p>Stuxio is operated by an independent developer. For any privacy request:
+  <a href="mailto:destek@stuxio.net">destek@stuxio.net</a></p>
+
+  <h2>2. Data we process</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Data</th><th>Why</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Email address</td><td>Creating your account, verifying sign-in, password reset and essential account notices</td><td>You</td></tr>
+      <tr><td>Name (optional)</td><td>Addressing you inside the app</td><td>You</td></tr>
+      <tr><td>Password</td><td>Verifying sign-in. <strong>Passwords are never stored in plain text</strong> — only an irreversible hash is kept.</td><td>You</td></tr>
+      <tr><td>Language preference</td><td>Interface language and the language of emails sent to you</td><td>You</td></tr>
+      <tr><td>Google account identifier and verified email</td><td>Only if you use “Continue with Google”, to match your account</td><td>Google</td></tr>
+      <tr><td>Your content: workspaces, tasks, study sessions (start/end/duration), in-app notifications</td><td>The core function of the app; statistics and progress tracking</td><td>You</td></tr>
+      <tr><td>Device identifier</td><td>Enforcing the one-phone-plus-one-desktop session rule</td><td>Generated by the app</td></tr>
+      <tr><td>Security records: IP address, client type, event type and time</td><td>Monitoring sign-in attempts and detecting abuse</td><td>Automatic</td></tr>
+      <tr><td>One-time verification codes</td><td>Email verification and password reset</td><td>Automatic</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>What we do not process</h3>
+  <ul>
+    <li>Location, contacts, photos, microphone or camera data</li>
+    <li>Advertising identifiers (IDFA / Android Advertising ID)</li>
+    <li>Third-party analytics or behavioural tracking data</li>
+    <li>Payment card details — any purchase is handled entirely by the Apple or Google store; card details never reach us</li>
+  </ul>
+
+  <h2>3. Data stored on your device</h2>
+  <p>To work offline, the app keeps a copy of your study data in its own local storage on
+  your device. This copy never leaves the device; it is only synchronised with the server
+  when a connection is available. It is wiped when you sign out or delete your account, and
+  uninstalling the app also removes it.</p>
+
+  <h2>4. Legal bases</h2>
+  <ul>
+    <li><strong>Performance of a contract:</strong> account data and your content — the service cannot be provided without them.</li>
+    <li><strong>Legitimate interests:</strong> security records — protecting your account and our infrastructure from abuse.</li>
+    <li><strong>Legal obligation:</strong> where retention is required by law.</li>
+  </ul>
+
+  <h2>5. Retention and location</h2>
+  <p>Server data is stored in a PostgreSQL database hosted in the
+  <strong>European Union (Frankfurt, Germany)</strong>, encrypted in transit and at rest.</p>
+  <ul>
+    <li><strong>Account and study data:</strong> until you delete it or close your account.</li>
+    <li><strong>Security records:</strong> kept for a limited period for abuse investigation; the email address in those records is removed when an account is deleted.</li>
+    <li><strong>Verification codes:</strong> short-lived and invalid after expiry.</li>
+  </ul>
+
+  <h2>6. Sharing</h2>
+  <p>We do not sell your data and do not share it with third parties for marketing. We rely
+  on the following providers to run the service:</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Provider</th><th>Purpose</th><th>Data shared</th></tr></thead>
+    <tbody>
+      <tr><td>Neon (database, EU/Frankfurt)</td><td>Data storage</td><td>Account and study data</td></tr>
+      <tr><td>MonsterASP (application server)</td><td>API hosting</td><td>Request traffic</td></tr>
+      <tr><td>Resend</td><td>Sending verification and notice emails</td><td>Email address and message content</td></tr>
+      <tr><td>Google</td><td>Authentication, only if Google sign-in is used</td><td>Google account identifier, email</td></tr>
+      <tr><td>Cloudflare</td><td>Serving the stuxio.net website</td><td>Technical data about the visit</td></tr>
+      <tr><td>Apple / Google stores</td><td>App distribution and purchases</td><td>Their own policies apply</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>We may also have to respond to lawful requests from competent authorities.</p>
+
+  <h2>7. Security</h2>
+  <ul>
+    <li>All traffic is encrypted with HTTPS/TLS.</li>
+    <li>Passwords are stored only as irreversible hashes.</li>
+    <li>Sessions use short-lived tokens; repeated failed sign-in attempts temporarily lock the account.</li>
+    <li>Rate limiting and centralised error handling are in place.</li>
+  </ul>
+  <p>No system is completely secure. If a security incident affects your data, you will be
+  informed within the period required by law.</p>
+
+  <h2>8. Your rights</h2>
+  <p>Under the GDPR and Turkish data protection law (KVKK) you have the right to access,
+  rectify, erase, restrict and object to the processing of your data, and to receive it in a
+  portable format.</p>
+  <p>To exercise these rights, write to
+  <a href="mailto:destek@stuxio.net">destek@stuxio.net</a>; requests are answered within 30
+  days at the latest. You also have the right to lodge a complaint with the data protection
+  authority in your country.</p>
+
+  <h2>9. Deleting your account</h2>
+  <p>You can delete your account yourself from <strong>Profile → Delete account</strong>
+  inside the app. Deletion permanently removes your workspaces, tasks, study sessions and
+  notifications, and anonymises your account record. Step-by-step instructions and the email
+  route: <a href="hesap-silme.html">Account and data deletion</a>.</p>
+
+  <h2>10. Children</h2>
+  <p>Stuxio is not directed at children under 13 and we do not knowingly collect data from
+  them. If you are below the age of digital consent in your country, use the app only with
+  the consent of a parent or guardian. If we learn of such data, we delete it without delay.</p>
+
+  <h2>11. Changes</h2>
+  <p>This policy may be updated. For significant changes you will be notified in the app or
+  by email; the date at the top always reflects the version in force.</p>
+
+  <h2>12. Contact</h2>
+  <p><a href="mailto:destek@stuxio.net">destek@stuxio.net</a></p>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <nav class="footer-links" aria-label="Alt menü">
+      <a href="/">Ana sayfa</a>
+      <a href="gizlilik.html">Gizlilik Politikası</a>
+      <a href="kullanim-kosullari.html">Kullanım Koşulları</a>
+      <a href="hesap-silme.html">Hesap ve veri silme</a>
+      <a href="destek.html">Destek</a>
+    </nav>
+    <p class="copyright">© 2026 Stuxio</p>
+  </div>
+</footer>
+
+<script src="assets/lang.js"></script>
+</body>
+</html>
