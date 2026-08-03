@@ -28,7 +28,7 @@
 <!-- ══════════════════ TÜRKÇE ══════════════════ -->
 <div data-lang="tr" class="is-active">
   <h1>Gizlilik Politikası</h1>
-  <p class="updated">Son güncelleme: 2 Ağustos 2026</p>
+  <p class="updated">Son güncelleme: 3 Ağustos 2026</p>
 
   <p>Bu politika, <strong>Stuxio</strong> mobil ve masaüstü uygulaması ile
   <strong>stuxio.net</strong> web sitesinde kişisel verilerin nasıl işlendiğini açıklar.
@@ -36,8 +36,10 @@
 
   <div class="callout">
     <p><strong>Kısaca:</strong> Yalnızca uygulamanın çalışması için gereken verileri
-    işliyoruz. Reklam ağı, üçüncü taraf analitik veya izleme aracı kullanmıyoruz.
-    Verilerinizi satmıyoruz. Hesabınızı uygulama içinden kalıcı olarak silebilirsiniz.</p>
+    işliyoruz. Reklam ağı, davranışsal izleme veya pazarlama analitiği kullanmıyoruz.
+    Uygulamanın çökmelerini tespit edebilmek için yalnızca bir hata takip hizmeti
+    (Sentry) kullanıyoruz. Verilerinizi satmıyoruz. Hesabınızı uygulama içinden
+    kalıcı olarak silebilirsiniz.</p>
   </div>
 
   <h2>1. Veri sorumlusu</h2>
@@ -98,11 +100,29 @@
   </table>
   </div>
 
+  <h3>Hata takibi ve uygulama kararlılığı</h3>
+  <p>Uygulamanın kararlılığını izlemek ve meydana gelen çökmeleri tespit etmek amacıyla
+  üçüncü taraf bir hizmet olan <strong>Sentry</strong>'yi (Functional Software, Inc.)
+  kullanıyoruz. Sentry yalnızca tanılama verilerini ve çökme günlüklerini toplar: hatanın
+  türü, oluştuğu kod satırı, uygulama sürümü, işletim sistemi sürümü, cihaz modeli ve
+  çökmeden hemen önceki teknik iz (hangi ekranın açık olduğu, ağ bağlantısının durumu).</p>
+  <p>Bu veriler adınız veya e-posta adresinizle <strong>ilişkilendirilmez</strong>; IP
+  adresiniz olay kaydına eklenmez ve Sentry tarafından saklanmaz. Hata metinlerine sızmış
+  olabilecek e-posta adresleri ile oturum anahtarları gönderimden önce otomatik olarak
+  maskelenir. Çökmesiz oturum
+  oranını hesaplayabilmek için uygulama kurulumuna özel rastgele bir kimlik üretilir; bu
+  kimlik kimliğinizi ortaya çıkarmaz ve uygulamayı kaldırdığınızda geçersiz olur.</p>
+  <p>Aktarım <strong>TLS ile şifrelenir</strong>. Sentry tarafından işlenen veriler
+  Frankfurt, Almanya'daki sunucularda barındırılır ve <strong>30 gün</strong> sonra
+  otomatik olarak silinir. Ayrıntı için
+  <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">Sentry'nin Gizlilik
+  Politikası</a>nı inceleyebilirsiniz.</p>
+
   <h3>İşlemediğimiz veriler</h3>
   <ul>
     <li>Konum bilgisi, rehber, fotoğraf, mikrofon veya kamera verisi</li>
     <li>Reklam kimliği (IDFA / Android Reklam Kimliği)</li>
-    <li>Üçüncü taraf analitik veya davranışsal izleme verisi</li>
+    <li>Davranışsal izleme, profilleme veya pazarlama analitiği verisi</li>
     <li>Ödeme kartı bilgisi — satın alma yapılırsa işlem tamamen Apple veya Google mağazası üzerinden yürür; kart bilgileriniz bize ulaşmaz</li>
   </ul>
 
@@ -111,6 +131,9 @@
   kendi uygulama deposunda tutar. Bu kopya cihazdan çıkmaz; yalnızca bağlantı geldiğinde
   sunucuyla eşitlenir. Oturumu kapattığınızda veya hesabınızı sildiğinizde bu yerel kopya
   cihazdan temizlenir. Uygulamayı kaldırmanız da yerel kopyayı siler.</p>
+  <p>Bu yerel veritabanı <strong>şifrelenmiş olarak</strong> saklanır. Şifreleme anahtarı
+  cihazın kendi güvenli anahtar deposunda tutulur (Android Keystore, iOS Keychain veya
+  Windows DPAPI) ve cihazdan dışarı çıkmaz.</p>
 
   <h2>4. Hukuki dayanak</h2>
   <ul>
@@ -140,6 +163,7 @@
       <tr><td>MonsterASP (uygulama sunucusu)</td><td>API'nin barındırılması</td><td>İstek trafiği</td></tr>
       <tr><td>Resend</td><td>Doğrulama ve bilgilendirme e-postalarının gönderimi</td><td>E-posta adresi ve ileti içeriği</td></tr>
       <tr><td>Google</td><td>Yalnızca Google ile giriş kullanılırsa kimlik doğrulama</td><td>Google hesap kimliği, e-posta</td></tr>
+      <tr><td>Sentry (hata takibi, AB/Frankfurt)</td><td>Çökmelerin tespiti ve uygulama kararlılığı</td><td>Çökme günlükleri ve tanılama verisi (kimliğinizle ilişkilendirilmez)</td></tr>
       <tr><td>Cloudflare</td><td>stuxio.net web sitesinin sunulması</td><td>Site ziyaretine ait teknik veriler</td></tr>
       <tr><td>Apple / Google mağazaları</td><td>Uygulama dağıtımı ve satın alma</td><td>Mağazanın kendi politikası geçerlidir</td></tr>
     </tbody>
@@ -190,7 +214,7 @@
 <!-- ══════════════════ ENGLISH ══════════════════ -->
 <div data-lang="en">
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 2 August 2026</p>
+  <p class="updated">Last updated: 3 August 2026</p>
 
   <p>This policy explains how personal data is handled in the <strong>Stuxio</strong> mobile
   and desktop application and on the <strong>stuxio.net</strong> website. By using the app
@@ -198,7 +222,8 @@
 
   <div class="callout">
     <p><strong>In short:</strong> we process only the data the app needs to work. There are
-    no ad networks, no third-party analytics and no tracking tools. We do not sell your
+    no ad networks, no behavioural tracking and no marketing analytics. We use a single
+    crash-reporting service (Sentry) so we can detect and fix crashes. We do not sell your
     data. You can permanently delete your account from inside the app.</p>
   </div>
 
@@ -224,11 +249,29 @@
   </table>
   </div>
 
+  <h3>Crash reporting and app stability</h3>
+  <p>We use <strong>Sentry</strong> (Functional Software, Inc.), a third-party service, to
+  monitor application stability and detect crashes. Sentry only collects diagnostic data and
+  crash logs: the error type, the line of code where it occurred, the app version, the
+  operating system version, the device model and a short technical trail of what happened
+  right before the crash (which screen was open, network connectivity state).</p>
+  <p>This data is <strong>not linked</strong> to your name or email address; your IP address
+  is not added to the event and is not stored by Sentry. Any email addresses or session
+  tokens that may have leaked into error messages are masked automatically before sending.
+  A random installation-specific
+  identifier is generated so we can calculate the crash-free session rate; it does not reveal
+  who you are and becomes invalid when you uninstall the app.</p>
+  <p>Data is <strong>encrypted in transit using TLS</strong>. Data processed by Sentry is
+  hosted on servers in Frankfurt, Germany and is automatically deleted after
+  <strong>30 days</strong>. For details, see
+  <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">Sentry's Privacy
+  Policy</a>.</p>
+
   <h3>What we do not process</h3>
   <ul>
     <li>Location, contacts, photos, microphone or camera data</li>
     <li>Advertising identifiers (IDFA / Android Advertising ID)</li>
-    <li>Third-party analytics or behavioural tracking data</li>
+    <li>Behavioural tracking, profiling or marketing analytics data</li>
     <li>Payment card details — any purchase is handled entirely by the Apple or Google store; card details never reach us</li>
   </ul>
 
@@ -237,8 +280,12 @@
   your device. This copy never leaves the device; it is only synchronised with the server
   when a connection is available. It is wiped when you sign out or delete your account, and
   uninstalling the app also removes it.</p>
+  <p>This local database is stored <strong>encrypted</strong>. The encryption key is held in
+  the device's own secure key store (Android Keystore, iOS Keychain or Windows DPAPI) and
+  never leaves the device.</p>
 
   <h2>4. Legal bases</h2>
+
   <ul>
     <li><strong>Performance of a contract:</strong> account data and your content — the service cannot be provided without them.</li>
     <li><strong>Legitimate interests:</strong> security records — protecting your account and our infrastructure from abuse.</li>
@@ -265,6 +312,7 @@
       <tr><td>MonsterASP (application server)</td><td>API hosting</td><td>Request traffic</td></tr>
       <tr><td>Resend</td><td>Sending verification and notice emails</td><td>Email address and message content</td></tr>
       <tr><td>Google</td><td>Authentication, only if Google sign-in is used</td><td>Google account identifier, email</td></tr>
+      <tr><td>Sentry (crash reporting, EU/Frankfurt)</td><td>Crash detection and app stability</td><td>Crash logs and diagnostic data (not linked to your identity)</td></tr>
       <tr><td>Cloudflare</td><td>Serving the stuxio.net website</td><td>Technical data about the visit</td></tr>
       <tr><td>Apple / Google stores</td><td>App distribution and purchases</td><td>Their own policies apply</td></tr>
     </tbody>
