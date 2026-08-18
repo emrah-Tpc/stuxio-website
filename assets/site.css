@@ -16,7 +16,6 @@
     --bg-soft: #0b0e15;
     --surface: rgba(19, 22, 29, 0.78);
     --surface-solid: #13161d;
-    --stage: #0d1220;            /* cihaz görsellerinin arkasındaki sahne */
     --border: rgba(255, 255, 255, 0.09);
     --border-strong: rgba(255, 255, 255, 0.16);
     --text: #f8fafc;
@@ -40,7 +39,6 @@
         --bg-soft: #ffffff;
         --surface: rgba(255, 255, 255, 0.88);
         --surface-solid: #ffffff;
-        --stage: #0d1220;        /* sahne iki temada da koyu: cihaz görselleri koyu */
         --border: rgba(15, 23, 42, 0.10);
         --border-strong: rgba(15, 23, 42, 0.18);
         --text: #0f172a;
@@ -104,7 +102,10 @@ img { max-width: 100%; display: block; }
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.8rem 0;
+    /* YALNIZ dikey: kisayol yazilirsa .container'in yatay dolgusu ezilir ve
+       marka dar ekranda ekranin soluna yapisir (olculdu: left=0). */
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
 }
 
 .brand {
@@ -270,20 +271,21 @@ section { padding: var(--section-y) 0; }
 
 /* Ekran görüntüleri koyu zeminli çekildi; sahne iki temada da koyu kalır ki görsel
    kendi arka planıyla sayfaya yapışmasın, kasıtlı bir yüzey gibi dursun. */
+/* Gorselin KENDI cihaz cercevesi var; ustune ikinci bir cerceve (kenarlik + zemin)
+   konunca "cerceve icinde cerceve" olusuyordu ve telefonun ust kenari dis cerceveye
+   degdigi icin goruntu ezilmis duruyordu. Bu yuzden kenarlik ve zemin YOK: yalnizca
+   koseleri yuvarlayip golge veriyoruz, cihaz sayfanin uzerinde duruyor. */
 .device {
-    background: var(--stage);
-    border: 1px solid var(--border-strong);
-    border-radius: 24px;
+    border-radius: 22px;
     overflow: hidden;
     box-shadow: var(--shadow-lg);
-    transition: transform 0.4s var(--ease);
 }
-.device img { width: 100%; }
-.device-sm { max-width: 300px; }
-.device-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-.device-row .device { flex: 1 1 240px; }
+.device img { width: 100%; height: auto; }
+.device-sm { max-width: 268px; }
+.device-row { display: flex; gap: 1.1rem; flex-wrap: wrap; justify-content: center; }
+.device-row .device { flex: 1 1 200px; max-width: 240px; }
 
-.hero-device { max-width: 360px; margin-left: auto; }
+.hero-device { max-width: 316px; margin-left: auto; }
 
 /* ── Anlatı bölümleri (odak / planla / istatistik) ─────────────────────── */
 
@@ -588,7 +590,9 @@ details.faq p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.6rem
     .plan { padding: 1.3rem; }
     .card { padding: 1.2rem; }
     .footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
-    .device-sm, .hero-device { max-width: 100%; }
+    /* Tam genislik verilince telefon 375px ekranda 657px yuksekliye cikiyor
+       (olculdu: viewport'un 0.81'i) ve tek basina ekrani dolduruyordu. */
+    .device-sm, .hero-device { max-width: 244px; }
     .cta-row .btn { width: 100%; }
     .offline { padding: 2.4rem 1rem; }
 }
