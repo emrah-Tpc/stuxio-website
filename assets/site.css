@@ -1,24 +1,37 @@
-/* Stuxio — ortak stil. Harici bağımlılık yok (font/CDN çağrısı yapılmaz). */
+/* Stuxio — ortak stil. Harici bağımlılık yok (font/CDN çağrısı yapılmaz).
+
+   Renk kaynağı: marka rengi UYGULAMA İKONUNDAN örneklendi (#004BD9 → #428BFF).
+   İkonda MOR YOKTUR; eski sürümdeki mavi→mor gradyan sonradan eklenmişti ve markayı
+   temsil etmiyordu. Mor burada yalnızca çok düşük yoğunlukta ikincil bir vurgu olarak
+   kalır, marka işaretinde ve düğmelerde kullanılmaz. */
 
 :root {
     color-scheme: dark light;
 
-    --primary: #4f8cff;
-    --accent: #8b5cf6;
+    --primary: #3E86FB;          /* ikonun parlak ucu */
+    --primary-deep: #1D5FE0;     /* ikonun koyu ucu */
+    --accent: #8b5cf6;           /* ikincil, çok seyrek */
 
     --bg: #06070b;
     --bg-soft: #0b0e15;
     --surface: rgba(19, 22, 29, 0.78);
     --surface-solid: #13161d;
+    --stage: #0d1220;            /* cihaz görsellerinin arkasındaki sahne */
     --border: rgba(255, 255, 255, 0.09);
     --border-strong: rgba(255, 255, 255, 0.16);
     --text: #f8fafc;
     --text-muted: #9aa4b2;
     --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 40px 90px rgba(0, 0, 0, 0.5);
 
     --radius: 18px;
     --radius-lg: 26px;
     --maxw: 1140px;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Bölüm ritmi — premium his için nefes alanı. */
+    --section-y: 6rem;
 }
 
 @media (prefers-color-scheme: light) {
@@ -27,11 +40,13 @@
         --bg-soft: #ffffff;
         --surface: rgba(255, 255, 255, 0.88);
         --surface-solid: #ffffff;
+        --stage: #0d1220;        /* sahne iki temada da koyu: cihaz görselleri koyu */
         --border: rgba(15, 23, 42, 0.10);
         --border-strong: rgba(15, 23, 42, 0.18);
         --text: #0f172a;
         --text-muted: #55617a;
         --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+        --shadow-lg: 0 40px 90px rgba(15, 23, 42, 0.16);
     }
 }
 
@@ -42,8 +57,8 @@ html { scroll-behavior: smooth; }
 body {
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background:
-        radial-gradient(1100px 520px at 12% -10%, rgba(79, 140, 255, 0.18), transparent 60%),
-        radial-gradient(900px 480px at 92% 4%, rgba(139, 92, 246, 0.14), transparent 60%),
+        radial-gradient(1100px 520px at 12% -8%, rgba(62, 134, 251, 0.13), transparent 60%),
+        radial-gradient(900px 480px at 92% 2%, rgba(62, 134, 251, 0.07), transparent 60%),
         var(--bg);
     background-attachment: fixed;
     color: var(--text);
@@ -59,6 +74,13 @@ img { max-width: 100%; display: block; }
 
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
 
+/* Klavye odağı her yerde görünür olmalı. */
+:where(a, button, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
 /* ── Üst çubuk ─────────────────────────────────────────────────────────── */
 
 .site-nav {
@@ -68,7 +90,13 @@ img { max-width: 100%; display: block; }
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     background: color-mix(in srgb, var(--bg) 82%, transparent);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+/* Sayfa kaydırılınca çubuk zeminden ayrışır. Tek bir sınıf — abartılı animasyon yok. */
+.site-nav.is-scrolled {
+    border-bottom-color: var(--border);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
 }
 
 .site-nav .inner {
@@ -76,13 +104,13 @@ img { max-width: 100%; display: block; }
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.85rem 0;
+    padding: 0.8rem 0;
 }
 
 .brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.6rem;
     font-weight: 800;
     font-size: 1.08rem;
     letter-spacing: -0.02em;
@@ -90,42 +118,81 @@ img { max-width: 100%; display: block; }
 }
 .brand:hover { text-decoration: none; }
 
+/* Marka işareti artık GERÇEK uygulama ikonu (assets/brand/). Eski hâli bir CSS
+   gradyan karesiydi ve markayla ilgisi yoktu. */
 .brand-mark {
     width: 32px;
     height: 32px;
     border-radius: 9px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    box-shadow: 0 0 22px rgba(79, 140, 255, 0.35);
     flex: none;
+    display: block;
+    box-shadow: 0 0 0 1px var(--border), 0 6px 16px rgba(29, 95, 224, 0.22);
 }
 
-.nav-links { display: flex; align-items: center; gap: 1.35rem; flex-wrap: wrap; }
+.nav-links { display: flex; align-items: center; gap: 1.6rem; }
 .nav-links a { color: var(--text-muted); font-size: 0.94rem; font-weight: 600; }
 .nav-links a:hover { color: var(--text); text-decoration: none; }
 
+.nav-right { display: flex; align-items: center; gap: 0.8rem; }
+
+/* Mobil menü düğmesi — masaüstünde gizli. */
+.nav-toggle {
+    display: none;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.nav-toggle span {
+    display: block; width: 17px; height: 1.6px; background: currentColor;
+    position: relative; transition: transform 0.22s var(--ease), opacity 0.15s linear;
+}
+.nav-toggle span::before,
+.nav-toggle span::after {
+    content: ""; position: absolute; left: 0; width: 17px; height: 1.6px; background: currentColor;
+    transition: transform 0.22s var(--ease);
+}
+.nav-toggle span::before { top: -5.5px; }
+.nav-toggle span::after { top: 5.5px; }
+.nav-toggle[aria-expanded="true"] span { transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span::before { transform: translateY(5.5px) rotate(-90deg); }
+.nav-toggle[aria-expanded="true"] span::after { opacity: 0; }
+
 /* ── Tipografi ─────────────────────────────────────────────────────────── */
 
-h1 { font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.07; letter-spacing: -0.03em; }
-h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); letter-spacing: -0.02em; line-height: 1.2; }
-h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.15rem, 5vw, 3.7rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 800; }
+h2 { font-size: clamp(1.65rem, 3.2vw, 2.5rem); letter-spacing: -0.028em; line-height: 1.15; font-weight: 800; }
+h3 { font-size: 1.06rem; letter-spacing: -0.01em; font-weight: 700; }
 
 .eyebrow {
-    display: inline-block;
-    padding: 0.45rem 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.42rem 0.9rem;
     border-radius: 999px;
-    background: rgba(79, 140, 255, 0.14);
-    border: 1px solid rgba(79, 140, 255, 0.28);
+    background: rgba(62, 134, 251, 0.12);
+    border: 1px solid rgba(62, 134, 251, 0.26);
     color: #7ea9ff;
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     font-weight: 700;
+    letter-spacing: 0.01em;
+}
+@media (prefers-color-scheme: light) {
+    .eyebrow { color: #1D5FE0; background: rgba(62, 134, 251, 0.10); }
 }
 
-.lead { color: var(--text-muted); font-size: 1.06rem; max-width: 62ch; }
+.lead { color: var(--text-muted); font-size: 1.08rem; max-width: 58ch; }
 .muted { color: var(--text-muted); }
 
-section { padding: 3.4rem 0; }
-.section-head { margin-bottom: 1.6rem; }
-.section-head p { color: var(--text-muted); margin-top: 0.5rem; max-width: 68ch; }
+section { padding: var(--section-y) 0; }
+
+.section-head { margin-bottom: 2.4rem; max-width: 62ch; }
+.section-head p { color: var(--text-muted); margin-top: 0.7rem; font-size: 1.02rem; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 
 /* ── Düğmeler ──────────────────────────────────────────────────────────── */
 
@@ -134,21 +201,22 @@ section { padding: 3.4rem 0; }
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.78rem 1.25rem;
+    padding: 0.82rem 1.4rem;
     border-radius: 999px;
     font-weight: 700;
     font-size: 0.96rem;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), background 0.18s var(--ease);
 }
 .btn:hover { transform: translateY(-2px); text-decoration: none; }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: linear-gradient(135deg, var(--primary), var(--primary-deep));
     color: #fff;
-    box-shadow: 0 10px 26px rgba(79, 140, 255, 0.28);
+    box-shadow: 0 10px 26px rgba(29, 95, 224, 0.30);
 }
+.btn-primary:hover { box-shadow: 0 14px 32px rgba(29, 95, 224, 0.38); }
 
 .btn-ghost {
     background: var(--surface);
@@ -156,13 +224,17 @@ section { padding: 3.4rem 0; }
     border-color: var(--border-strong);
 }
 
-/* ── Kartlar ───────────────────────────────────────────────────────────── */
+.btn-sm { padding: 0.6rem 1.05rem; font-size: 0.9rem; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+
+/* ── Kartlar / ızgara ──────────────────────────────────────────────────── */
 
 .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1.3rem;
+    padding: 1.4rem;
 }
 
 .grid { display: grid; gap: 1rem; }
@@ -173,7 +245,7 @@ section { padding: 3.4rem 0; }
     width: 38px; height: 38px;
     border-radius: 11px;
     display: grid; place-items: center;
-    background: linear-gradient(135deg, rgba(79, 140, 255, 0.22), rgba(139, 92, 246, 0.22));
+    background: linear-gradient(135deg, rgba(62, 134, 251, 0.20), rgba(62, 134, 251, 0.08));
     border: 1px solid var(--border-strong);
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
@@ -181,7 +253,105 @@ section { padding: 3.4rem 0; }
 
 .card h3 + p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.35rem; }
 
-/* ── Ekran görüntüsü çerçevesi ─────────────────────────────────────────── */
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+
+.hero { padding-top: 3.6rem; padding-bottom: 4.5rem; }
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3rem;
+    align-items: center;
+}
+.hero h1 { margin: 1.15rem 0 1.1rem; }
+.hero .lead { font-size: 1.12rem; }
+.hero-note { font-size: 0.88rem; margin-top: 1.1rem; }
+
+/* ── Cihaz sahnesi ─────────────────────────────────────────────────────── */
+
+/* Ekran görüntüleri koyu zeminli çekildi; sahne iki temada da koyu kalır ki görsel
+   kendi arka planıyla sayfaya yapışmasın, kasıtlı bir yüzey gibi dursun. */
+.device {
+    background: var(--stage);
+    border: 1px solid var(--border-strong);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.4s var(--ease);
+}
+.device img { width: 100%; }
+.device-sm { max-width: 300px; }
+.device-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.device-row .device { flex: 1 1 240px; }
+
+.hero-device { max-width: 360px; margin-left: auto; }
+
+/* ── Anlatı bölümleri (odak / planla / istatistik) ─────────────────────── */
+
+.story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.4rem;
+    align-items: center;
+}
+.story.reverse .story-media { order: -1; }
+.story-media { display: flex; justify-content: center; }
+.story h2 { margin-bottom: 0.9rem; }
+.story p { color: var(--text-muted); max-width: 46ch; }
+.story-list { list-style: none; margin-top: 1.3rem; display: grid; gap: 0.65rem; }
+.story-list li { display: flex; gap: 0.65rem; color: var(--text-muted); font-size: 0.96rem; }
+.story-list .tick { color: var(--primary); font-weight: 800; flex: none; }
+
+/* ── Problem ───────────────────────────────────────────────────────────── */
+
+.problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem; }
+.problem-item {
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 1.15rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    background: color-mix(in srgb, var(--surface-solid) 40%, transparent);
+}
+.problem-item strong { display: block; color: var(--text); font-weight: 700; margin-bottom: 0.2rem; }
+.problem-arrow { text-align: center; color: var(--text-muted); margin: 1.8rem 0 1.4rem; font-size: 1.4rem; }
+
+/* ── Çevrimdışı (görselsiz, tipografik) ────────────────────────────────── */
+
+.offline {
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 4rem 1.5rem;
+    background:
+        radial-gradient(600px 300px at 50% 0%, rgba(62, 134, 251, 0.12), transparent 70%),
+        var(--surface);
+}
+.offline h2 { max-width: 20ch; margin: 0.9rem auto 1rem; }
+.offline p { color: var(--text-muted); max-width: 54ch; margin: 0 auto; }
+
+/* ── Güven ─────────────────────────────────────────────────────────────── */
+
+.trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 1rem; }
+.trust-item { display: flex; gap: 0.85rem; align-items: flex-start; }
+.trust-item .tick { color: var(--primary); font-weight: 800; flex: none; margin-top: 0.1rem; }
+.trust-item strong { display: block; color: var(--text); font-weight: 700; }
+.trust-item span { color: var(--text-muted); font-size: 0.94rem; }
+
+/* ── Marka hikâyesi ────────────────────────────────────────────────────── */
+
+.story-note {
+    border-left: 2px solid var(--primary);
+    padding: 0.3rem 0 0.3rem 1.4rem;
+    max-width: 60ch;
+}
+.story-note p { color: var(--text-muted); }
+.story-note p + p { margin-top: 0.8rem; }
+.byline { display: flex; align-items: center; gap: 0.7rem; margin-top: 1.4rem; }
+.byline img { width: 34px; height: 34px; border-radius: 9px; }
+.byline span { font-size: 0.92rem; color: var(--text-muted); }
+.byline b { color: var(--text); font-weight: 700; }
+
+/* ── Ekran görüntüsü çerçevesi (belge/eski kullanım) ───────────────────── */
 
 .shot {
     background: linear-gradient(145deg, var(--surface-solid), color-mix(in srgb, var(--surface-solid) 80%, var(--primary) 6%));
@@ -196,13 +366,24 @@ section { padding: 3.4rem 0; }
 
 /* ── Fiyatlandırma ─────────────────────────────────────────────────────── */
 
-.plan { display: flex; flex-direction: column; gap: 0.85rem; }
-.plan.highlight { border-color: rgba(79, 140, 255, 0.45); box-shadow: 0 0 0 1px rgba(79,140,255,0.18), var(--shadow); }
-.plan ul { list-style: none; display: grid; gap: 0.5rem; }
+.plan { display: flex; flex-direction: column; gap: 0.9rem; padding: 1.7rem; }
+.plan.highlight {
+    border-color: rgba(62, 134, 251, 0.42);
+    box-shadow: 0 0 0 1px rgba(62, 134, 251, 0.16), var(--shadow);
+}
+.plan ul { list-style: none; display: grid; gap: 0.55rem; }
 .plan li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.95rem; color: var(--text-muted); }
 .plan li b { color: var(--text); font-weight: 650; }
 .tick { color: var(--primary); flex: none; font-weight: 800; }
 .dash { color: var(--text-muted); flex: none; font-weight: 800; }
+.plan-badge {
+    align-self: flex-start;
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+    color: #7ea9ff; background: rgba(62, 134, 251, 0.12);
+    border: 1px solid rgba(62, 134, 251, 0.3);
+    padding: 0.15rem 0.55rem; border-radius: 999px;
+}
+@media (prefers-color-scheme: light) { .plan-badge { color: #1D5FE0; } }
 
 /* ── Mağaza rozetleri ──────────────────────────────────────────────────── */
 
@@ -227,11 +408,12 @@ section { padding: 3.4rem 0; }
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: #7ea9ff;
-    border: 1px solid rgba(79, 140, 255, 0.3);
-    background: rgba(79, 140, 255, 0.12);
+    border: 1px solid rgba(62, 134, 251, 0.3);
+    background: rgba(62, 134, 251, 0.12);
     padding: 0.1rem 0.45rem;
     border-radius: 999px;
 }
+@media (prefers-color-scheme: light) { .store-badge .soon { color: #1D5FE0; } }
 
 /* ── SSS ───────────────────────────────────────────────────────────────── */
 
@@ -239,7 +421,7 @@ details.faq {
     border: 1px solid var(--border);
     border-radius: 14px;
     background: var(--surface);
-    padding: 0.95rem 1.1rem;
+    padding: 1rem 1.15rem;
 }
 details.faq + details.faq { margin-top: 0.6rem; }
 details.faq summary {
@@ -254,6 +436,19 @@ details.faq summary::-webkit-details-marker { display: none; }
 details.faq summary::after { content: "+"; color: var(--primary); font-weight: 800; }
 details.faq[open] summary::after { content: "–"; }
 details.faq p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.6rem; }
+
+/* ── Final CTA ─────────────────────────────────────────────────────────── */
+
+.final-cta {
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 3.4rem 1.5rem;
+    background:
+        radial-gradient(700px 320px at 50% 0%, rgba(62, 134, 251, 0.14), transparent 70%),
+        var(--surface);
+}
+.final-cta p { color: var(--text-muted); margin: 0.7rem auto 1.6rem; max-width: 50ch; }
 
 /* ── Belge sayfaları (gizlilik, koşullar…) ─────────────────────────────── */
 
@@ -274,8 +469,8 @@ details.faq p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.6rem
 .table-wrap { overflow-x: auto; }
 
 .callout {
-    border: 1px solid rgba(79, 140, 255, 0.3);
-    background: rgba(79, 140, 255, 0.09);
+    border: 1px solid rgba(62, 134, 251, 0.3);
+    background: rgba(62, 134, 251, 0.09);
     border-radius: 14px;
     padding: 1rem 1.15rem;
     margin: 1.2rem 0;
@@ -289,7 +484,7 @@ details.faq p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.6rem
     font: inherit; font-size: 0.85rem; font-weight: 700;
     padding: 0.3rem 0.75rem; border-radius: 999px; cursor: pointer;
 }
-.lang-switch button[aria-selected="true"] { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; }
+.lang-switch button[aria-selected="true"] { background: linear-gradient(135deg, var(--primary), var(--primary-deep)); color: #fff; }
 
 [data-lang] { display: none; }
 [data-lang].is-active { display: block; }
@@ -298,14 +493,27 @@ details.faq p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.6rem
 
 .site-footer {
     border-top: 1px solid var(--border);
-    margin-top: 2.5rem;
-    padding: 2.2rem 0 2.6rem;
+    margin-top: 3rem;
+    padding: 3.2rem 0 2.8rem;
 }
-.footer-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: flex-start; }
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, minmax(120px, 0.6fr));
+    gap: 2.2rem;
+    align-items: flex-start;
+}
+.footer-tagline { color: var(--text-muted); font-size: 0.92rem; margin-top: 0.7rem; max-width: 34ch; }
+.footer-col h3 {
+    font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--text); margin-bottom: 0.85rem;
+}
+.footer-col a { display: block; color: var(--text-muted); font-size: 0.92rem; font-weight: 600; padding: 0.22rem 0; }
+.footer-col a:hover { color: var(--text); }
+/* Eski düz bağlantı listesi (belge sayfaları hâlâ kullanabilir) */
 .footer-links { display: flex; flex-wrap: wrap; gap: 1.1rem; }
 .footer-links a { color: var(--text-muted); font-size: 0.92rem; font-weight: 600; }
 .footer-links a:hover { color: var(--text); }
-.copyright { color: var(--text-muted); font-size: 0.88rem; margin-top: 1.4rem; }
+.copyright { color: var(--text-muted); font-size: 0.88rem; margin-top: 2.2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
 
 .skip-link {
     position: absolute; left: -9999px;
@@ -314,8 +522,73 @@ details.faq p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.6rem
 }
 .skip-link:focus { left: 1rem; top: 1rem; z-index: 100; }
 
+/* ── Kaydırma ile beliren içerik ───────────────────────────────────────── */
+
+/* JS yoksa içerik GÖRÜNÜR kalır: .js sınıfı yalnız script çalışınca eklenir.
+   Böylece animasyon bir gösterim koşulu değil, sadece bir süsleme olur. */
+.js .reveal { opacity: 0; transform: translateY(14px); }
+.js .reveal.is-visible {
+    opacity: 1; transform: none;
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .btn:hover { transform: none; }
+    .device { transition: none; }
+}
+
+/* ── Duyarlılık ────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    :root { --section-y: 4.6rem; }
+    .hero-grid { gap: 2.2rem; }
+    .story { gap: 2.4rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+
 @media (max-width: 860px) {
-    .nav-links { gap: 0.9rem; }
-    .nav-links .hide-sm { display: none; }
-    section { padding: 2.4rem 0; }
+    :root { --section-y: 3.8rem; }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        left: 0; right: 0; top: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.5rem 1.25rem 1.1rem;
+        background: color-mix(in srgb, var(--bg) 97%, transparent);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-links.is-open { display: flex; }
+    .nav-links a { padding: 0.7rem 0; font-size: 1rem; border-bottom: 1px solid var(--border); }
+    .nav-links a:last-child { border-bottom: 0; }
+
+    .nav-toggle { display: inline-flex; }
+    .site-nav .inner { position: relative; }
+
+    .hero { padding-top: 2.4rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-device { margin: 0 auto; max-width: 300px; }
+
+    .story { grid-template-columns: 1fr; }
+    .story.reverse .story-media { order: 0; }
+    .story p { max-width: none; }
+
+    .offline { padding: 3rem 1.2rem; }
+    .final-cta { padding: 2.6rem 1.2rem; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 1rem; }
+    .plan { padding: 1.3rem; }
+    .card { padding: 1.2rem; }
+    .footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+    .device-sm, .hero-device { max-width: 100%; }
+    .cta-row .btn { width: 100%; }
+    .offline { padding: 2.4rem 1rem; }
 }

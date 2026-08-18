@@ -13,14 +13,30 @@
 <meta property="og:url" content="https://stuxio.net/">
 <meta property="og:title" content="Stuxio — Çevrimdışı da çalışan odak ve çalışma asistanı">
 <meta property="og:description" content="Ders planı, görev takibi, odak modu ve çalışma istatistikleri tek uygulamada. İnternet kesilse bile süren kaybolmaz.">
-<meta property="og:image" content="https://stuxio.net/screenshotss/genel_bakis.png">
+<meta property="og:image" content="https://stuxio.net/screenshotss/app-panel.png">
+<meta property="og:image:alt" content="Stuxio genel bakış ekranı">
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="theme-color" content="#06070b" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f7f8fc" media="(prefers-color-scheme: light)">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f8cff'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ccircle cx='16' cy='17' r='8' fill='none' stroke='white' stroke-width='2.4'/%3E%3Cpath d='M16 13v4.4l2.8 1.8' stroke='white' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3Cpath d='M12.5 5h7' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/brand/stuxio-icon-192.png">
+<link rel="apple-touch-icon" href="assets/brand/stuxio-icon-192.png">
 <link rel="stylesheet" href="assets/site.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Stuxio",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "Android, iOS, Windows",
+  "description": "Ders planı, görev takibi, odak kronometresi ve çalışma istatistiklerini tek akışta birleştiren, çevrimdışı da çalışan odak asistanı.",
+  "inLanguage": ["tr", "en", "de"],
+  "url": "https://stuxio.net/",
+  "author": { "@type": "Person", "name": "Emrah Topçu" }
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">İçeriğe geç</a>
@@ -28,154 +44,235 @@
 <header class="site-nav">
   <div class="container inner">
     <a class="brand" href="/">
-      <span class="brand-mark" aria-hidden="true"></span>
+      <img class="brand-mark" src="assets/brand/stuxio-icon-96.png" width="32" height="32" alt="">
       <span>Stuxio</span>
     </a>
-    <nav class="nav-links" aria-label="Ana menü">
+
+    <nav class="nav-links" id="nav-menu" aria-label="Ana menü">
       <a href="#ozellikler">Özellikler</a>
-      <a href="#ekranlar" class="hide-sm">Ekranlar</a>
+      <a href="#nasil">Nasıl çalışır</a>
       <a href="#planlar">Planlar</a>
-      <a href="#sss" class="hide-sm">SSS</a>
-      <a href="destek">Destek</a>
+      <a href="#sss">SSS</a>
     </nav>
+
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm" href="destek">Destek</a>
+      <button class="nav-toggle" type="button" data-nav-toggle
+              aria-expanded="false" aria-controls="nav-menu" aria-label="Menüyü aç">
+        <span></span>
+      </button>
+    </div>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
-  <section class="container" style="padding-top:3.2rem">
-    <div class="grid grid-2" style="gap:2.4rem; align-items:center">
+  <!-- ── 1. Hero ──────────────────────────────────────────────────────── -->
+  <section class="container hero">
+    <div class="hero-grid">
       <div>
         <span class="eyebrow">Çevrimdışı öncelikli çalışma asistanı</span>
-        <h1 style="margin:1rem 0 0.9rem">Çalış, odaklan,<br>ilerlemeni gör.</h1>
+        <h1>Çalış, odaklan,<br>ilerlemeni gör.</h1>
         <p class="lead">
           Stuxio ders planlarını, görevleri, odak kronometresini ve çalışma
           istatistiklerini tek akışta toplar. Bağlantın kesilse bile kronometre
           durmaz — kaydın cihazında tutulur, internet gelince sunucuyla eşitlenir.
         </p>
 
-        <div class="stores" style="margin:1.6rem 0 0.9rem">
+        <div class="cta-row" style="margin-top:1.8rem">
+          <a class="btn btn-primary" href="#nasil">Nasıl çalışıyor?</a>
+          <a class="btn btn-ghost" href="#planlar">Planları gör</a>
+        </div>
+
+        <div class="stores" style="margin-top:1.8rem">
           <span class="store-badge">▶ Google Play <span class="soon">Yakında</span></span>
           <span class="store-badge"> App Store <span class="soon">Yakında</span></span>
           <span class="store-badge">◻ Microsoft Store <span class="soon">Yakında</span></span>
         </div>
-        <p class="muted" style="font-size:0.9rem">
+        <p class="muted hero-note">
           Stuxio henüz mağazalarda yayında değil. Yayın tarihi belli olduğunda burada duyurulacak.
         </p>
       </div>
 
-      <figure class="shot" style="margin:0">
-        <img src="screenshotss/genel_bakis.png" width="1919" height="875"
-             alt="Stuxio genel bakış ekranı: günün çalışma süresi, haftalık grafik ve ders kartları">
-      </figure>
+      <div class="hero-device device">
+        <img src="screenshotss/app-panel.png" width="720" height="1024" fetchpriority="high"
+             alt="Stuxio genel bakış ekranı: verimlilik skoru, toplam ve tamamlanan görev sayısı, günün çalışma süresi">
+      </div>
     </div>
   </section>
 
-  <!-- ── Özellikler ───────────────────────────────────────────────────── -->
-  <section class="container" id="ozellikler">
-    <div class="section-head">
-      <h2>Ne yapar?</h2>
-      <p>Dağınık not defteri, ayrı kronometre ve ayrı takvim yerine tek bir çalışma akışı.</p>
+  <!-- ── 2–3. Problem → Çözüm ─────────────────────────────────────────── -->
+  <section class="container reveal" id="nasil">
+    <div class="section-head center">
+      <h2>Çalışmak neden bu kadar dağınık olmak zorunda?</h2>
+      <p>
+        Çalışmanın kendisi zaten yeterince zor. Zorluğun bir kısmı ise sadece
+        parçaların ayrı yerlerde durmasından geliyor.
+      </p>
     </div>
 
-    <div class="grid grid-3">
-      <article class="card">
-        <div class="feature-icon" aria-hidden="true">⏱️</div>
-        <h3>Odak kronometresi</h3>
-        <p>Serbest kronometre, klasik 25+5, derin 50+10 veya kendi belirlediğin süre. Mola bitimleri ve süre sonu bildirimle haber verilir.</p>
-      </article>
+    <div class="problem-grid">
+      <div class="problem-item"><strong>Görevler</strong>bir not uygulamasında</div>
+      <div class="problem-item"><strong>Kronometre</strong>başka bir uygulamada</div>
+      <div class="problem-item"><strong>Plan</strong>takvimde</div>
+      <div class="problem-item"><strong>Ne kadar çalıştın?</strong>hiçbir yerde</div>
+    </div>
 
-      <article class="card">
-        <div class="feature-icon" aria-hidden="true">📶</div>
-        <h3>Çevrimdışı çalışır</h3>
-        <p>Bağlantı koptuğunda sayaç durmaz. Yaptığın değişiklikler cihazda sıraya alınır, internet gelince otomatik eşitlenir.</p>
-      </article>
+    <p class="problem-arrow" aria-hidden="true">↓</p>
 
-      <article class="card">
-        <div class="feature-icon" aria-hidden="true">📚</div>
-        <h3>Çalışma alanları ve görevler</h3>
-        <p>Her ders veya proje için ayrı bir alan aç, altına görevlerini yaz. Görevi kronometreye bağlayınca süre doğrudan ona işlenir.</p>
-      </article>
-
-      <article class="card">
-        <div class="feature-icon" aria-hidden="true">📊</div>
-        <h3>Gerçek istatistikler</h3>
-        <p>Günlük ve haftalık süre dağılımı, en verimli saat aralıkların, alan bazlı kırılım ve oturum geçmişi.</p>
-      </article>
-
-      <article class="card">
-        <div class="feature-icon" aria-hidden="true">🔔</div>
-        <h3>Hatırlatmalar</h3>
-        <p>Görev hatırlatmaları ve teşvik bildirimleri uygulama kapalıyken de çalışsın diye işletim sistemine önceden planlanır.</p>
-      </article>
-
-      <article class="card">
-        <div class="feature-icon" aria-hidden="true">🖥️</div>
-        <h3>Telefon ve masaüstü birlikte</h3>
-        <p>Aynı hesapla bir telefon ve bir masaüstünde eşzamanlı oturum. Veriler iki tarafta da güncel kalır.</p>
-      </article>
+    <div class="section-head center" style="margin-bottom:0">
+      <h2>Stuxio hepsini tek bir çalışma akışında birleştirir.</h2>
+      <p>
+        Bir alan aç, görevini yaz, kronometreyi o göreve bağla. Harcadığın süre
+        doğrudan ilgili yere işlenir; sonunda ne kadar çalıştığını tahmin etmen gerekmez.
+      </p>
     </div>
   </section>
 
-  <!-- ── Ekranlar ─────────────────────────────────────────────────────── -->
-  <section class="container" id="ekranlar">
-    <div class="section-head">
-      <h2>Ekranlar</h2>
-      <p>Görseller masaüstü sürümünden alınmıştır.</p>
-    </div>
-
-    <div class="grid grid-2">
-      <figure class="shot">
-        <img src="screenshotss/kronometre.png" width="1919" height="975" loading="lazy"
-             alt="Çalışma odası ekranı: mod seçimi ve kronometre">
-        <figcaption>Çalışma odası — mod seç, görevini bağla, başlat.</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="screenshotss/odak_mode.png" width="1918" height="966" loading="lazy"
-             alt="Tam ekran odak modu">
-        <figcaption>Odak modu — ekranda yalnızca süre kalır.</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="screenshotss/lessons.png" width="1906" height="981" loading="lazy"
-             alt="Çalışma alanları listesi">
-        <figcaption>Çalışma alanları — ders ya da proje bazlı ayrım.</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="screenshotss/gorev_takvim.png" width="1919" height="902" loading="lazy"
-             alt="Görev takvimi görünümü">
-        <figcaption>Görevler — takvim üzerinde planlama.</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="screenshotss/calisma_gecmisi.png" width="1919" height="631" loading="lazy"
-             alt="Çalışma geçmişi grafiği">
-        <figcaption>Çalışma geçmişi — süre nereye gitti.</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="screenshotss/gorev_detay.png" width="1047" height="480" loading="lazy"
-             alt="Görev detay kartı">
-        <figcaption>Görev detayı — planlanan ve gerçekleşen süre.</figcaption>
-      </figure>
+  <!-- ── 4. Odaklan ───────────────────────────────────────────────────── -->
+  <section class="container reveal" id="ozellikler">
+    <div class="story">
+      <div>
+        <span class="eyebrow">Odaklan</span>
+        <h2 style="margin-top:1rem">Bir mod seç ve başla.</h2>
+        <p>
+          Serbest kronometre, klasik 25+5, derin 50+10 ya da kendi belirlediğin süre.
+          Odak modunda ekranda yalnızca süre kalır; mola bitimleri ve süre sonu
+          bildirimle haber verilir.
+        </p>
+        <ul class="story-list">
+          <li><span class="tick">✓</span><span>Dört çalışma modu — hepsi ücretsiz planda</span></li>
+          <li><span class="tick">✓</span><span>Derse özel renk teması</span></li>
+          <li><span class="tick">✓</span><span>Görevi kronometreye bağla, süre ona işlensin</span></li>
+        </ul>
+      </div>
+      <div class="story-media">
+        <div class="device device-sm">
+          <img src="screenshotss/app-odak.png" width="720" height="1024" loading="lazy"
+               alt="Çalışma odası ekranı: serbest, klasik 25+5, derin 50+10 ve özel mod seçenekleri ile kronometre">
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ── Planlar ──────────────────────────────────────────────────────── -->
-  <section class="container" id="planlar">
+  <section class="container reveal">
+    <div class="story reverse">
+      <div>
+        <span class="eyebrow">Planla</span>
+        <h2 style="margin-top:1rem">Her ders ya da proje için ayrı bir alan.</h2>
+        <p>
+          Çalışma alanı aç, altına görevlerini yaz, önceliklendir ve tamamla.
+          Görevler takvim üzerinde de planlanabilir; hangi görevin ne kadar sürdüğünü
+          sonradan görürsün.
+        </p>
+        <ul class="story-list">
+          <li><span class="tick">✓</span><span>Okul, iş ve kişisel gelişim alanları bir arada</span></li>
+          <li><span class="tick">✓</span><span>Planlanan ve gerçekleşen süre karşılaştırması</span></li>
+          <li><span class="tick">✓</span><span>Görev hatırlatmaları uygulama kapalıyken de çalışır</span></li>
+        </ul>
+      </div>
+      <div class="story-media">
+        <div class="device device-sm">
+          <img src="screenshotss/app-gorevler.png" width="720" height="1024" loading="lazy"
+               alt="Görev listesi ekranı: en uzun süren görevler ve her birinin harcanan süresi">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <div class="story">
+      <div>
+        <span class="eyebrow">İlerlemeni gör</span>
+        <h2 style="margin-top:1rem">Süre nereye gitti, ne zaman verimlisin?</h2>
+        <p>
+          Günlük ve haftalık süre dağılımı, alan bazlı kırılım, oturum geçmişi ve
+          en verimli çalışma aralığın. Rakamlar tahmine değil, gerçekten tuttuğun
+          süreye dayanır.
+        </p>
+        <ul class="story-list">
+          <li><span class="tick">✓</span><span>En verimli saat aralığın verilerinden hesaplanır</span></li>
+          <li><span class="tick">✓</span><span>Ders bazlı dağılım ve oturum geçmişi</span></li>
+          <li><span class="tick">✓</span><span>Serini büyüt: rozetler ve günlük seri takibi</span></li>
+        </ul>
+      </div>
+      <div class="story-media device-row">
+        <div class="device">
+          <img src="screenshotss/app-istatistik.png" width="720" height="1024" loading="lazy"
+               alt="İstatistik ekranı: aylık çalışma geçmişi grafiği, toplam ve ortalama süreler">
+        </div>
+        <div class="device">
+          <img src="screenshotss/app-ipucu.png" width="720" height="1024" loading="lazy"
+               alt="En verimli aralık kartı: 18:00-21:00 arası, toplam odak süresi ve yoğunluk oranı">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. Çevrimdışı ────────────────────────────────────────────────── -->
+  <section class="container reveal">
+    <div class="offline">
+      <span class="eyebrow">Çevrimdışı</span>
+      <h2>İnternet bağlantın değil, odağın önemli.</h2>
+      <p>
+        Wi-Fi kesilse de, metroda da, bağlantın hiç olmasa da kronometre çalışmaya
+        devam eder. Süre cihazın saatinden hesaplanır; uygulamayı kapatıp açsan bile
+        kaybolmaz. Yaptığın değişiklikler cihazda sıraya alınır ve internet gelince
+        kendiliğinden eşitlenir.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 8. Güven ─────────────────────────────────────────────────────── -->
+  <section class="container reveal">
     <div class="section-head">
-      <h2>Planlar</h2>
-      <p>Ücretsiz plan kalıcıdır ve süre sınırı yoktur. Aşağıdaki farklar uygulamada birebir geçerlidir.</p>
+      <h2>Verilerin sana ait.</h2>
+      <p>Kısa özet — ayrıntısı <a href="gizlilik">Gizlilik Politikası</a>'nda.</p>
+    </div>
+
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="tick">✓</span>
+        <span><strong>Reklam yok</strong>Reklam ağı, davranışsal izleme veya pazarlama analitiği kullanılmıyor.</span>
+      </div>
+      <div class="trust-item">
+        <span class="tick">✓</span>
+        <span><strong>Verilerin satılmaz</strong>Pazarlama amacıyla üçüncü taraflarla paylaşılmaz.</span>
+      </div>
+      <div class="trust-item">
+        <span class="tick">✓</span>
+        <span><strong>Avrupa Birliği'nde barındırılır</strong>Hesabın ve çalışma verilerin Frankfurt'taki bir PostgreSQL veritabanında tutulur.</span>
+      </div>
+      <div class="trust-item">
+        <span class="tick">✓</span>
+        <span><strong>Hesabını kendin silersin</strong>Uygulama içinden kalıcı silme; ayrıntısı <a href="hesap-silme">hesap ve veri silme</a> sayfasında.</span>
+      </div>
+      <div class="trust-item">
+        <span class="tick">✓</span>
+        <span><strong>Yalnızca çökme takibi</strong>Uygulamanın çökmelerini görebilmek için bir hata takip hizmeti (Sentry) kullanılır; bu kayıtlar adın veya e-postanla ilişkilendirilmez.</span>
+      </div>
+      <div class="trust-item">
+        <span class="tick">✓</span>
+        <span><strong>Çalışma sürene dokunulmaz</strong>Harcanmış bir çalışma süresi hiçbir planda silinmez.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 9. Planlar ───────────────────────────────────────────────────── -->
+  <section class="container reveal" id="planlar">
+    <div class="section-head">
+      <h2>İhtiyacın olduğunda büyüt.</h2>
+      <p>
+        Ücretsiz plan kalıcıdır ve süre sınırı yoktur. Aşağıdaki farklar uygulamada
+        birebir geçerlidir.
+      </p>
     </div>
 
     <div class="grid grid-2">
       <article class="card plan">
         <div>
           <h3 style="font-size:1.15rem">Ücretsiz</h3>
-          <p class="muted" style="font-size:0.94rem">Başlamak için yeterli.</p>
+          <p class="muted" style="font-size:0.94rem">Başlamak için ihtiyacın olan her şey.</p>
         </div>
         <ul>
           <li><span class="tick">✓</span><span>Sınırsız çalışma oturumu ve <b>tüm kronometre modları</b></span></li>
@@ -190,7 +287,8 @@
 
       <article class="card plan highlight">
         <div>
-          <h3 style="font-size:1.15rem">Premium</h3>
+          <span class="plan-badge">Premium</span>
+          <h3 style="font-size:1.15rem; margin-top:0.55rem">Stuxio'nun tamamı</h3>
           <p class="muted" style="font-size:0.94rem">Sınırları kaldırır.</p>
         </div>
         <ul>
@@ -206,16 +304,55 @@
       </article>
     </div>
 
-    <div class="callout" style="margin-top:1.4rem">
+    <div class="callout" style="margin-top:1.6rem">
       <p><strong>Çalışma sürene dokunulmaz.</strong> Kronometreyi çevrimdışı durdurmak
       hiçbir planda engellenmez. Harcanmış bir çalışma süresini bağlantı yok diye silmek
       özellik kısıtı değil, veri kaybı olurdu.</p>
     </div>
   </section>
 
-  <!-- ── SSS ──────────────────────────────────────────────────────────── -->
-  <section class="container" id="sss">
+  <!-- ── 10. Marka hikâyesi ───────────────────────────────────────────── -->
+  <section class="container reveal">
+    <div class="story">
+      <div>
+        <span class="eyebrow">Stuxio'yu neden yapıyoruz?</span>
+        <h2 style="margin-top:1rem">Daha fazla araç değil, daha az dağınıklık.</h2>
+        <div class="story-note" style="margin-top:1.2rem">
+          <p>
+            Stuxio'nun amacı çalışma hayatını daha karmaşık hale getirmek değil. Tam tersi:
+            daha fazla uygulama arasında gidip gelmek zorunda kalmadan daha düzenli
+            çalışabilmek.
+          </p>
+          <p>
+            Bu yüzden çevrimdışı çalışmak bir "ek özellik" değil, baştan verilmiş bir karar.
+            Bu yüzden ücretsiz planda kronometre modlarının hiçbiri kilitli değil. Ve bu
+            yüzden harcadığın süreye, bağlantın yok diye dokunulmuyor.
+          </p>
+        </div>
+        <div class="byline">
+          <img src="assets/brand/stuxio-icon-96.png" width="34" height="34" alt="">
+          <span>Bağımsız olarak geliştiriliyor · <b>Emrah Topçu</b></span>
+        </div>
+      </div>
+      <div class="story-media">
+        <div class="device device-sm">
+          <img src="screenshotss/app-odak-tam.png" width="720" height="1024" loading="lazy"
+               alt="Tam ekran odak modu: ekranda yalnızca geçen süre görünür">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 11. SSS ──────────────────────────────────────────────────────── -->
+  <section class="container reveal" id="sss">
     <div class="section-head"><h2>Sık sorulanlar</h2></div>
+
+    <details class="faq">
+      <summary>Stuxio tam olarak ne yapıyor?</summary>
+      <p>Çalışma alanlarını, görevleri, odak kronometresini ve çalışma istatistiklerini
+      tek uygulamada birleştirir. Bir alan açar, altına görevlerini yazar, kronometreyi
+      o göreve bağlarsın; harcadığın süre doğrudan ilgili göreve ve alana işlenir.</p>
+    </details>
 
     <details class="faq">
       <summary>İnternet olmadan gerçekten çalışıyor mu?</summary>
@@ -226,23 +363,39 @@
     </details>
 
     <details class="faq">
-      <summary>Aynı hesabı hem telefonda hem bilgisayarda kullanabilir miyim?</summary>
-      <p>Evet — aynı anda bir telefon ve bir masaüstü oturumu açık kalabilir. Aynı türden
-      ikinci bir cihazdan giriş yapılırsa önce onay istenir, onaylarsan diğer cihazdaki
-      oturum kapanır. Masaüstü uygulaması Premium gerektirir.</p>
+      <summary>Ücretsiz mi, Premium ne getiriyor?</summary>
+      <p>Ücretsiz plan kalıcıdır ve süre sınırı yoktur: sınırsız çalışma oturumu, tüm
+      kronometre modları, odak modu, bildirimler, 3 çalışma alanı, alan başına 7 görev ve
+      7 günlük istatistik. Premium; sınırsız alan ve görev, 30 gün ile 3 aylık istatistik
+      aralıkları, çevrimdışıyken tam düzenleme ve masaüstü uygulaması ekler.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Verilerim güvende mi, reklam veya izleme var mı?</summary>
+      <p>Reklam ağı, davranışsal izleme veya pazarlama analitiği kullanılmıyor ve verilerin
+      satılmıyor. Yalnızca uygulamanın çökmelerini tespit edebilmek için bir hata takip
+      hizmeti (Sentry) kullanılıyor; bu kayıtlar adın veya e-posta adresinle
+      ilişkilendirilmez. Ayrıntı için <a href="gizlilik">Gizlilik Politikası</a>.</p>
     </details>
 
     <details class="faq">
       <summary>Verilerim nerede tutuluyor?</summary>
       <p>Hesabın ve çalışma verilerin Avrupa Birliği'nde (Frankfurt) barındırılan bir
       PostgreSQL veritabanında, cihazındaki kopya ise uygulamanın kendi yerel deposunda
-      tutulur. Ayrıntı için <a href="gizlilik">Gizlilik Politikası</a>.</p>
+      tutulur.</p>
     </details>
 
     <details class="faq">
-      <summary>Reklam veya izleme var mı?</summary>
-      <p>Hayır. Uygulamada reklam ağı, üçüncü taraf analitik veya izleme aracı
-      bulunmuyor; verilerin satılmaz veya pazarlama amacıyla paylaşılmaz.</p>
+      <summary>Hangi cihazlarda çalışıyor?</summary>
+      <p>iOS, Android ve Windows. Uygulama .NET MAUI tabanlıdır ve üç platformda da aynı
+      arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Aynı hesabı hem telefonda hem bilgisayarda kullanabilir miyim?</summary>
+      <p>Evet — aynı anda bir telefon ve bir masaüstü oturumu açık kalabilir. Aynı türden
+      ikinci bir cihazdan giriş yapılırsa önce onay istenir, onaylarsan diğer cihazdaki
+      oturum kapanır. Masaüstü uygulaması Premium gerektirir.</p>
     </details>
 
     <details class="faq">
@@ -251,23 +404,20 @@
       göndererek. Süreç ve silinen veriler:
       <a href="hesap-silme">Hesap ve veri silme</a>.</p>
     </details>
-
-    <details class="faq">
-      <summary>Hangi platformlarda çalışıyor?</summary>
-      <p>iOS, Android ve Windows. Uygulama .NET MAUI tabanlıdır ve üç platformda da aynı
-      arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır.</p>
-    </details>
   </section>
 
-  <!-- ── Destek ───────────────────────────────────────────────────────── -->
-  <section class="container">
-    <div class="card" style="text-align:center; padding:2.2rem 1.3rem">
+  <!-- ── 12. Final CTA ────────────────────────────────────────────────── -->
+  <section class="container reveal">
+    <div class="final-cta">
       <h2>Bir sorun mu var, bir fikrin mi?</h2>
-      <p class="muted" style="margin:0.6rem auto 1.3rem; max-width:52ch">
+      <p>
         Hata bildirimi, öneri ve hesabınla ilgili talepler için doğrudan yazabilirsin.
+        Gelen her mesajı geliştiren kişi okuyor.
       </p>
-      <a class="btn btn-primary" href="mailto:support@stuxio.net">support@stuxio.net</a>
-      <p style="margin-top:1rem"><a href="destek">Destek sayfası</a></p>
+      <div class="cta-row" style="justify-content:center">
+        <a class="btn btn-primary" href="mailto:support@stuxio.net">support@stuxio.net</a>
+        <a class="btn btn-ghost" href="destek">Destek sayfası</a>
+      </div>
     </div>
   </section>
 
@@ -278,23 +428,37 @@
     <div class="footer-grid">
       <div>
         <a class="brand" href="/">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <img class="brand-mark" src="assets/brand/stuxio-icon-96.png" width="32" height="32" alt="">
           <span>Stuxio</span>
         </a>
-        <p class="muted" style="font-size:0.92rem; margin-top:0.5rem; max-width:38ch">
-          Çevrimdışı da çalışan odak ve çalışma asistanı.
-        </p>
+        <p class="footer-tagline">Çalış. Odaklan. İlerle.<br>Çevrimdışı da çalışan odak ve çalışma asistanı.</p>
       </div>
-      <nav class="footer-links" aria-label="Alt menü">
+
+      <nav class="footer-col" aria-label="Ürün">
+        <h3>Ürün</h3>
+        <a href="#ozellikler">Özellikler</a>
+        <a href="#nasil">Nasıl çalışır</a>
+        <a href="#planlar">Planlar</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Destek">
+        <h3>Destek</h3>
+        <a href="destek">Destek</a>
+        <a href="#sss">Sık sorulanlar</a>
+        <a href="mailto:support@stuxio.net">support@stuxio.net</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Yasal">
+        <h3>Yasal</h3>
         <a href="gizlilik">Gizlilik Politikası</a>
         <a href="kullanim-kosullari">Kullanım Koşulları</a>
         <a href="hesap-silme">Hesap ve veri silme</a>
-        <a href="destek">Destek</a>
       </nav>
     </div>
     <p class="copyright">© 2026 Stuxio · Geliştirici: Emrah Topçu. Tüm hakları saklıdır.</p>
   </div>
 </footer>
 
+<script src="assets/site.js" defer></script>
 </body>
 </html>
