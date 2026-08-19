@@ -13,8 +13,14 @@
 <meta property="og:url" content="https://stuxio.net/">
 <meta property="og:title" content="Stuxio — Çevrimdışı da çalışan odak ve çalışma asistanı">
 <meta property="og:description" content="Ders planı, görev takibi, odak modu ve çalışma istatistikleri tek uygulamada. İnternet kesilse bile süren kaybolmaz.">
-<meta property="og:image" content="https://stuxio.net/screenshotss/app-panel.png">
-<meta property="og:image:alt" content="Stuxio genel bakış ekranı">
+<meta property="og:locale" content="tr_TR">
+<!-- Sosyal kart görseli 1200x630 YATAY olmalı. Burada eskiden 720x1379 dikey bir telefon
+     ekranı vardı; summary_large_image bunu ya kötü kırpıyor ya küçük karta düşürüyordu. -->
+<meta property="og:image" content="https://stuxio.net/assets/brand/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Stuxio — çevrimdışı da çalışan odak ve çalışma asistanı">
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="theme-color" content="#06070b" media="(prefers-color-scheme: dark)">
@@ -23,7 +29,13 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/brand/stuxio-icon-192.png">
 <link rel="apple-touch-icon" href="assets/brand/stuxio-icon-192.png">
 <link rel="stylesheet" href="assets/site.css">
+<!-- Hero görseli sayfanın en büyük öğesi (LCP). Önceden yüklenmesi Core Web Vitals'ı
+     iyileştirir; sıralamaya dolaylı etkisi var. -->
+<link rel="preload" as="image" href="screenshotss/app-panel.png" fetchpriority="high">
 
+<!-- Yapılandırılmış veri. SSS maddeleri sayfadaki GÖRÜNÜR metinden üretildi:
+     Google, şema ile sayfa içeriğinin birebir eşleşmesini şart koşuyor. SSS değişirse
+     burası da değişmeli. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,6 +47,105 @@
   "inLanguage": ["tr", "en", "de"],
   "url": "https://stuxio.net/",
   "author": { "@type": "Person", "name": "Emrah Topçu" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stuxio.net/#org",
+      "name": "Stuxio",
+      "url": "https://stuxio.net/",
+      "logo": "https://stuxio.net/assets/brand/stuxio-icon-512.png",
+      "email": "support@stuxio.net",
+      "founder": {
+        "@type": "Person",
+        "name": "Emrah Topçu"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://stuxio.net/#site",
+      "url": "https://stuxio.net/",
+      "name": "Stuxio",
+      "inLanguage": "tr-TR",
+      "publisher": {
+        "@id": "https://stuxio.net/#org"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://stuxio.net/#sss",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Stuxio tam olarak ne yapıyor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Çalışma alanlarını, görevleri, odak kronometresini ve çalışma istatistiklerini tek uygulamada birleştirir. Bir alan açar, altına görevlerini yazar, kronometreyi o göreve bağlarsın; harcadığın süre doğrudan ilgili göreve ve alana işlenir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "İnternet olmadan gerçekten çalışıyor mu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Evet. Kronometre cihazın saatinden hesaplandığı için bağlantı olmadan da doğru sürer ve uygulama kapatılıp açılsa bile süre kaybolmaz. Kayıtlar cihazda saklanır, bağlantı gelince sunucuyla eşitlenir. Ücretsiz planda çevrimdışıyken yeni ders/görev oluşturma kapalıdır; çalışma oturumları her planda açıktır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ücretsiz mi, Premium ne getiriyor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ücretsiz plan kalıcıdır ve süre sınırı yoktur: sınırsız çalışma oturumu, tüm kronometre modları, odak modu, bildirimler, 3 çalışma alanı, alan başına 7 görev ve 7 günlük istatistik. Premium; sınırsız alan ve görev, 30 gün ile 3 aylık istatistik aralıkları, çevrimdışıyken tam düzenleme ve masaüstü uygulaması ekler."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Verilerim güvende mi, reklam veya izleme var mı?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reklam ağı, davranışsal izleme veya pazarlama analitiği kullanılmıyor ve verilerin satılmıyor. Yalnızca uygulamanın çökmelerini tespit edebilmek için bir hata takip hizmeti (Sentry) kullanılıyor; bu kayıtlar adın veya e-posta adresinle ilişkilendirilmez. Ayrıntı için Gizlilik Politikası."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Verilerim nerede tutuluyor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hesabın ve çalışma verilerin Avrupa Birliği'nde (Frankfurt) barındırılan bir PostgreSQL veritabanında, cihazındaki kopya ise uygulamanın kendi yerel deposunda tutulur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hangi cihazlarda çalışıyor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "iOS, Android ve Windows. Uygulama .NET MAUI tabanlıdır ve üç platformda da aynı arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Aynı hesabı hem telefonda hem bilgisayarda kullanabilir miyim?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Evet — aynı anda bir telefon ve bir masaüstü oturumu açık kalabilir. Aynı türden ikinci bir cihazdan giriş yapılırsa önce onay istenir, onaylarsan diğer cihazdaki oturum kapanır. Masaüstü uygulaması Premium gerektirir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hesabımı nasıl silerim?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Uygulama içinden Profil ekranındaki “Hesabı sil” adımıyla ya da bize e-posta göndererek. Süreç ve silinen veriler: Hesap ve veri silme."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 </head>
