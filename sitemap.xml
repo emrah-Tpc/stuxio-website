@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- scripts/sitemap-uret.sh tarafından üretildi — ELLE DÜZENLEME. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stuxio.net/</loc>
     <lastmod>2026-08-19</lastmod>
-    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://stuxio.net/gizlilik</loc>
     <lastmod>2026-08-19</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stuxio.net/kullanim-kosullari</loc>
     <lastmod>2026-08-19</lastmod>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://stuxio.net/hesap-silme</loc>
     <lastmod>2026-08-19</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stuxio.net/destek</loc>
     <lastmod>2026-08-19</lastmod>
-    <priority>0.6</priority>
   </url>
 </urlset>
