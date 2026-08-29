@@ -43,10 +43,14 @@
   "@type": "SoftwareApplication",
   "name": "Stuxio",
   "applicationCategory": "ProductivityApplication",
-  "operatingSystem": "Android, iOS, Windows",
+  "operatingSystem": "Android, Windows",
   "description": "Ders planı, görev takibi, odak kronometresi ve çalışma istatistiklerini tek akışta birleştiren, çevrimdışı da çalışan odak asistanı.",
   "inLanguage": ["tr", "en", "de"],
   "url": "https://stuxio.net/",
+  "downloadUrl": [
+    "https://play.google.com/store/apps/details?id=com.studytime.desktopclient",
+    "https://apps.microsoft.com/detail/9MWC4B942CZ6"
+  ],
   "author": { "@type": "Person", "name": "Emrah Topçu" }
 }
 </script>
@@ -125,7 +129,7 @@
           "name": "Hangi cihazlarda çalışıyor?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "iOS, Android ve Windows. Uygulama .NET MAUI tabanlıdır ve üç platformda da aynı arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır."
+            "text": "Şu an Android (Google Play) ve Windows (Microsoft Store). iOS sürümü hazırlanıyor. Uygulama .NET MAUI tabanlıdır ve platformlarda aynı arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır."
           }
         },
         {
@@ -197,12 +201,12 @@
         </div>
 
         <div class="stores" style="margin-top:1.8rem">
-          <span class="store-badge">▶ Google Play <span class="soon">Yakında</span></span>
+          <a class="store-badge live" href="https://play.google.com/store/apps/details?id=com.studytime.desktopclient" target="_blank" rel="noopener">▶ Google Play</a>
+          <a class="store-badge live" href="https://apps.microsoft.com/detail/9MWC4B942CZ6" target="_blank" rel="noopener">◻ Microsoft Store</a>
           <span class="store-badge"> App Store <span class="soon">Yakında</span></span>
-          <span class="store-badge">◻ Microsoft Store <span class="soon">Yakında</span></span>
         </div>
         <p class="muted hero-note">
-          Stuxio henüz mağazalarda yayında değil. Yayın tarihi belli olduğunda burada duyurulacak.
+          Android ve Windows'ta yayında. iOS sürümü hazırlanıyor.
         </p>
       </div>
 
@@ -306,6 +310,7 @@
           <li><span class="tick">✓</span><span>En verimli saat aralığın verilerinden hesaplanır</span></li>
           <li><span class="tick">✓</span><span>Ders bazlı dağılım ve oturum geçmişi</span></li>
           <li><span class="tick">✓</span><span>Serini büyüt: rozetler ve günlük seri takibi</span></li>
+          <li><span class="tick">✓</span><span>Seçtiğin aralığı <b>PDF raporu</b> olarak dışa aktar</span></li>
         </ul>
       </div>
       <div class="story-media device-row">
@@ -409,9 +414,10 @@
           <li><span class="tick">✓</span><span><b>30 gün</b> ve <b>3 ay</b> istatistik aralıkları</span></li>
           <li><span class="tick">✓</span><span>Çevrimdışıyken de <b>tam düzenleme</b></span></li>
           <li><span class="tick">✓</span><span><b>Masaüstü uygulaması</b> (telefonla eşzamanlı)</span></li>
+          <li><span class="tick">✓</span><span><b>PDF Odak Raporu</b> — istatistiklerini belge olarak dışa aktar</span></li>
         </ul>
         <p class="muted" style="font-size:0.88rem">
-          Fiyatlandırma yayın sırasında mağaza üzerinden duyurulacaktır.
+          Güncel fiyat Google Play ve Microsoft Store sayfalarında görünür.
         </p>
       </article>
     </div>
@@ -499,8 +505,9 @@
 
     <details class="faq">
       <summary>Hangi cihazlarda çalışıyor?</summary>
-      <p>iOS, Android ve Windows. Uygulama .NET MAUI tabanlıdır ve üç platformda da aynı
-      arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır.</p>
+      <p>Şu an Android (Google Play) ve Windows (Microsoft Store). iOS sürümü
+      hazırlanıyor. Uygulama .NET MAUI tabanlıdır ve platformlarda aynı arayüzü
+      kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır.</p>
     </details>
 
     <details class="faq">

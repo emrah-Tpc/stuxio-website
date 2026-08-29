@@ -417,6 +417,28 @@ section { padding: var(--section-y) 0; }
 }
 @media (prefers-color-scheme: light) { .store-badge .soon { color: #1D5FE0; } }
 
+/* Yayında olan mağaza: rozet artık bir BAĞLANTI.
+   Ayrım kasıtlı — "Yakında" rozeti kesikli kenarlık + soluk metinle bilerek
+   tıklanamaz görünüyor. Canlı olan tam güçte metin, düz kenarlık ve hover
+   alıyor ki tıklanabilirliği rengin değil, DAVRANIŞIN kendisi anlatsın.
+   Odak halkası global :focus-visible kuralından geliyor, burada ezilmiyor. */
+.store-badge.live {
+    border-style: solid;
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.store-badge.live:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+/* Hareketi azalt tercihi: yükselme kalkar, kenarlık geri bildirimi kalır. */
+@media (prefers-reduced-motion: reduce) {
+    .store-badge.live { transition: border-color 0.15s ease; }
+    .store-badge.live:hover { transform: none; }
+}
+
 /* ── SSS ───────────────────────────────────────────────────────────────── */
 
 details.faq {
