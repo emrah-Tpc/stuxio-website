@@ -43,11 +43,12 @@
   "@type": "SoftwareApplication",
   "name": "Stuxio",
   "applicationCategory": "ProductivityApplication",
-  "operatingSystem": "Android, Windows",
+  "operatingSystem": "iOS, Android, Windows",
   "description": "Ders planı, görev takibi, odak kronometresi ve çalışma istatistiklerini tek akışta birleştiren, çevrimdışı da çalışan odak asistanı.",
   "inLanguage": ["tr", "en", "de"],
   "url": "https://stuxio.net/",
   "downloadUrl": [
+    "https://apps.apple.com/app/id6806873464",
     "https://play.google.com/store/apps/details?id=com.studytime.desktopclient",
     "https://apps.microsoft.com/detail/9MWC4B942CZ6"
   ],
@@ -129,7 +130,7 @@
           "name": "Hangi cihazlarda çalışıyor?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Şu an Android (Google Play) ve Windows (Microsoft Store). iOS sürümü hazırlanıyor. Uygulama .NET MAUI tabanlıdır ve platformlarda aynı arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır."
+            "text": "iPhone (App Store), Android (Google Play) ve Windows (Microsoft Store). Uygulama .NET MAUI tabanlıdır ve platformlarda aynı arayüzü kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır."
           }
         },
         {
@@ -200,13 +201,44 @@
           <a class="btn btn-ghost" href="#planlar">Planları gör</a>
         </div>
 
+        <!-- Uc magaza da YAYINDA (iOS 5 Eyl 2026'da onaylandi).
+             ⚠️ Bir magazanin durumu degisirse BURASI TEK BASINA YETMEZ: ayni olgu
+             SoftwareApplication semasinda (operatingSystem + downloadUrl), FAQPage
+             JSON-LD'sinde ve gorunur SSS metninde de duruyor. Dordunu birden guncelle;
+             Google sema ile sayfa icerigin birebir eslesmesini sart kosuyor. -->
         <div class="stores" style="margin-top:1.8rem">
-          <a class="store-badge live" href="https://play.google.com/store/apps/details?id=com.studytime.desktopclient" target="_blank" rel="noopener">▶ Google Play</a>
-          <a class="store-badge live" href="https://apps.microsoft.com/detail/9MWC4B942CZ6" target="_blank" rel="noopener">◻ Microsoft Store</a>
-          <span class="store-badge"> App Store <span class="soon">Yakında</span></span>
+          <a class="store-btn" href="https://apps.apple.com/app/id6806873464" target="_blank" rel="noopener"
+             aria-label="Stuxio'yu App Store'dan indir">
+            <svg class="store-btn-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M17.05 12.54c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.62-1.7-3.19-1.72-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.18-1.54 2.67-.39 6.62 1.11 8.79.73 1.06 1.6 2.25 2.74 2.21 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.08 2.65-2.15.84-1.23 1.18-2.42 1.2-2.48-.03-.01-2.29-.88-2.31-3.49zM14.88 5.9c.6-.74 1.01-1.76.9-2.78-.87.04-1.93.58-2.56 1.31-.56.65-1.06 1.69-.92 2.68.97.08 1.97-.49 2.58-1.21z"/>
+            </svg>
+            <span class="store-btn-text"><small>İndir</small><strong>App Store</strong></span>
+          </a>
+
+          <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.studytime.desktopclient" target="_blank" rel="noopener"
+             aria-label="Stuxio'yu Google Play'den indir">
+            <svg class="store-btn-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="#00D2FF" d="M3.6 2.3c-.24.25-.38.64-.38 1.15v17.1c0 .51.14.9.38 1.15l.06.05 9.58-9.58v-.23L3.66 2.25l-.06.05z"/>
+              <path fill="#FFCE00" d="M16.4 15.4l-3.16-3.17v-.23l3.17-3.17.07.04 3.78 2.15c1.08.61 1.08 1.62 0 2.24l-3.78 2.15-.08.04z"/>
+              <path fill="#FF3A44" d="M16.47 15.36L13.24 12.1 3.6 21.7c.36.38.94.42 1.6.05l11.27-6.4z"/>
+              <path fill="#00E676" d="M16.47 8.83L5.2 2.44c-.66-.38-1.24-.33-1.6.05l9.64 9.61 3.23-3.27z"/>
+            </svg>
+            <span class="store-btn-text"><small>İndir</small><strong>Google Play</strong></span>
+          </a>
+
+          <a class="store-btn" href="https://apps.microsoft.com/detail/9MWC4B942CZ6" target="_blank" rel="noopener"
+             aria-label="Stuxio'yu Microsoft Store'dan indir">
+            <svg class="store-btn-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="#F25022" d="M3 3h8.4v8.4H3z"/>
+              <path fill="#7FBA00" d="M12.6 3H21v8.4h-8.4z"/>
+              <path fill="#00A4EF" d="M3 12.6h8.4V21H3z"/>
+              <path fill="#FFB900" d="M12.6 12.6H21V21h-8.4z"/>
+            </svg>
+            <span class="store-btn-text"><small>İndir</small><strong>Microsoft Store</strong></span>
+          </a>
         </div>
         <p class="muted hero-note">
-          Android ve Windows'ta yayında. iOS sürümü hazırlanıyor.
+          iPhone, Android ve Windows'ta yayında — üçünde de aynı hesap, aynı veri.
         </p>
       </div>
 
@@ -326,7 +358,64 @@
     </div>
   </section>
 
-  <!-- ── 7. Çevrimdışı ────────────────────────────────────────────────── -->
+  <!-- ── 7. MASAÜSTÜ — HAZIR AMA KAPALI ────────────────────────────────
+       Bölümün işaretlemesi ve stili (.shots-grid / .shot, site.css) HAZIR.
+       Yayına alınmadı çünkü `screenshotss/` içindeki masaüstü görüntüleri
+       KULLANILAMAZ durumda (5 Eyl 2026'da tek tek açılıp bakıldı):
+
+         • lessons.png, kronometre.png, kronometre2.png, odak_mode.png →
+           üst barda uygulamanın ESKİ ADI "StudyTime" yazıyor. Marka değişti.
+         • lessons.png → Türkçe karakterler bozuk: "i? ve ki?isel geli?im s?re?lerin".
+         • genel_bakis.png → üst menü yok; kartlar "Bekleyen"/"Bugün" (artık
+           "Bugün Çalışma"/"Aktif Alan"), "Zaman Takibi" (artık "Verimlilik
+           Analizi"), "Yeni Alan" düğmesi (artık "+").
+         • kronometre.png → üç sütunlu eski düzen; şimdi Görevler/Notlar köşe
+           düğmeleri, "Duvar Saati" seçici var, düğme "BAŞLA" değil "BAŞLAT".
+
+       ⚠️ Bunları yayınlamak yanlış ürün göstermek olurdu; mobil görseller
+       (app-*.png) ise GÜNCEL, onlara dokunulmadı.
+
+       AÇMAK İÇİN: aşağıdaki dört dosyayı güncel Windows sürümünden yeniden
+       çekip `screenshotss/` içine aynı adlarla koy, sonra bu yorumu kaldır ve
+       her <img> için gerçek width/height değerlerini yaz (düzen zıplamasın).
+
+  <section class="container reveal" id="masaustu">
+    <div class="section-head">
+      <span class="eyebrow">Masaüstü</span>
+      <h2>Aynı akış, büyük ekranda.</h2>
+      <p>
+        Windows uygulaması telefondakinin küçültülmüşü değil; geniş ekranın
+        sunduğu alanı kullanır. Hesabın ve verin ortaktır — telefonda başladığın
+        oturumu masaüstünde görürsün.
+      </p>
+    </div>
+
+    <div class="shots-grid">
+      <figure class="shot">
+        <img src="screenshotss/genel_bakis.png" width="1919" height="875" loading="lazy" decoding="async"
+             alt="Stuxio masaüstü genel bakış: verimlilik skoru, görev sayıları, günün çalışma süresi ve haftalık verimlilik grafiği">
+        <figcaption>Genel bakış — günün özeti ve haftalık eğilim</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshotss/lessons.png" width="1906" height="981" loading="lazy" decoding="async"
+             alt="Stuxio masaüstü dersler ekranı: alanlar kart olarak listeleniyor">
+        <figcaption>Dersler ve alanlar — okul, iş ve kişisel gelişim ayrı</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshotss/kronometre.png" width="1919" height="975" loading="lazy" decoding="async"
+             alt="Stuxio masaüstü çalışma odası: mod seçimi, kronometre halkası ve başlat düğmesi">
+        <figcaption>Çalışma odası — mod seç ve başla</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshotss/odak_mode.png" width="1918" height="966" loading="lazy" decoding="async"
+             alt="Stuxio masaüstü odak modu: ekranı kaplayan büyük sayaç ve duraklat/bitir düğmeleri">
+        <figcaption>Odak modu — ekranda sadece süre kalır</figcaption>
+      </figure>
+    </div>
+  </section>
+  -->
+
+  <!-- ── 8. Çevrimdışı ────────────────────────────────────────────────── -->
   <section class="container reveal">
     <div class="offline">
       <span class="eyebrow">Çevrimdışı</span>
@@ -340,7 +429,7 @@
     </div>
   </section>
 
-  <!-- ── 8. Güven ─────────────────────────────────────────────────────── -->
+  <!-- ── 9. Güven ─────────────────────────────────────────────────────── -->
   <section class="container reveal">
     <div class="section-head">
       <h2>Verilerin sana ait.</h2>
@@ -375,7 +464,7 @@
     </div>
   </section>
 
-  <!-- ── 9. Planlar ───────────────────────────────────────────────────── -->
+  <!-- ── 10. Planlar ───────────────────────────────────────────────────── -->
   <section class="container reveal" id="planlar">
     <div class="section-head">
       <h2>İhtiyacın olduğunda büyüt.</h2>
@@ -429,7 +518,7 @@
     </div>
   </section>
 
-  <!-- ── 10. Marka hikâyesi ───────────────────────────────────────────── -->
+  <!-- ── 11. Marka hikâyesi ───────────────────────────────────────────── -->
   <section class="container reveal">
     <div class="story">
       <div>
@@ -461,7 +550,7 @@
     </div>
   </section>
 
-  <!-- ── 11. SSS ──────────────────────────────────────────────────────── -->
+  <!-- ── 12. SSS ──────────────────────────────────────────────────────── -->
   <section class="container reveal" id="sss">
     <div class="section-head"><h2>Sık sorulanlar</h2></div>
 
@@ -505,8 +594,8 @@
 
     <details class="faq">
       <summary>Hangi cihazlarda çalışıyor?</summary>
-      <p>Şu an Android (Google Play) ve Windows (Microsoft Store). iOS sürümü
-      hazırlanıyor. Uygulama .NET MAUI tabanlıdır ve platformlarda aynı arayüzü
+      <p>iPhone (App Store), Android (Google Play) ve Windows (Microsoft Store).
+      Uygulama .NET MAUI tabanlıdır ve platformlarda aynı arayüzü
       kullanır. Türkçe, İngilizce ve Almanca dil desteği vardır.</p>
     </details>
 
@@ -525,7 +614,7 @@
     </details>
   </section>
 
-  <!-- ── 12. Final CTA ────────────────────────────────────────────────── -->
+  <!-- ── 13. Final CTA ────────────────────────────────────────────────── -->
   <section class="container reveal">
     <div class="final-cta">
       <h2>Bir sorun mu var, bir fikrin mi?</h2>
