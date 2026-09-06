@@ -1,42 +1,34 @@
-# Masaüstü ekran görüntüleri — güncelleme notu
+# Masaüstü ekran görüntüleri
 
-Sitedeki **masaüstü bölümü yazılı ama kapalı** (`index.html`, "7. MASAÜSTÜ" yorumu).
-Açılması için bu klasörde güncel dört dosya olması gerekiyor.
+Sitedeki masaüstü bölümü (`index.html`, "7. Masaüstü") şu dört dosyayı kullanır:
 
-## Gereken dosyalar
+| Dosya | Ekran | Ölçü |
+|---|---|---|
+| `genel_bakis.png` | Panel / Genel Bakış | 1919×974 |
+| `lessons.png` | Dersler & Alanlar | 1919×976 |
+| `kronometre.png` | Çalışma Odası | 1918×974 |
+| `odak_mode.png` | Odak modu | 1919×986 |
 
-| Dosya adı | Hangi ekran |
-|---|---|
-| `genel_bakis.png` | Panel / Genel Bakış |
-| `lessons.png` | Dersler & Alanlar |
-| `kronometre.png` | Çalışma Odası (mod seçimi + kronometre) |
-| `odak_mode.png` | Odak modu (tam ekran sayaç) |
+**Güncel sürüm: 23 Ağustos 2026**, Windows uygulamasından.
 
-Aynı adlarla üzerine yaz. Sonra `index.html`'deki yorumu kaldır ve her `<img>`
-için gerçek `width`/`height` değerlerini gir (düzen zıplamasın diye).
+## ⚠️ Yenilerken
 
-## ⚠️ Mevcut dosyalar neden kullanılamıyor
+- **`index.html`'deki `width`/`height` değerlerini de güncelle.** Oranlar farklı;
+  yanlış değer görsel yüklenirken sayfayı zıplatır (CLS).
+- **Tek tema seç** — dördü de koyu. Karışık tema ızgarada dağınık durur.
+- **Pencere kaplamalarını dahil etme**: bildirim balonu, Ekran Alıntısı Aracı
+  penceresi, açık bildirim paneli vb.
+- **Gerçekçi ama temiz veri.** Boş ekran ürünü zayıf gösterir; "Test123" gibi
+  adlar güven vermez.
 
-5 Eylül 2026'da tek tek açılıp bakıldı:
+## Geçmiş
 
-- `lessons.png`, `kronometre.png`, `kronometre2.png`, `odak_mode.png` → üst barda
-  uygulamanın **eski adı "StudyTime"** yazıyor.
-- `lessons.png` → Türkçe karakterler bozuk: "i? ve ki?isel geli?im s?re?lerin".
-- `genel_bakis.png` → eski düzen: üst menü yok, "Zaman Takibi" (artık "Verimlilik
-  Analizi"), "Bekleyen" kartı (artık "Aktif Alan").
-
-Bunları yayınlamak yanlış ürün göstermek olur.
-
-## Çekerken dikkat
-
-- **Tek tema seç.** Site koyu; karışık tema ızgarada dağınık durur.
-- **Pencere kaplamalarını dahil etme** — bildirim balonu, Ekran Alıntısı Aracı
-  penceresi vb. görüntüde kalmasın.
-- **Gerçekçi ama temiz veri**: boş ekran ürünü zayıf gösterir, "Test123" gibi
-  adlar da güven vermez.
-- Genişlik ~1900px yeterli; mevcut dosyalar da o ölçüde.
+2 Ağustos 2026 tarihli ilk masaüstü görselleri **eski marka dönemine aitti** —
+üst barda "StudyTime" yazıyordu, `lessons.png`'de Türkçe karakterler bozuktu ve
+`genel_bakis.png` artık var olmayan bir düzeni ("Zaman Takibi", "Bekleyen" kartı)
+gösteriyordu. 5 Eylül 2026'da hepsi güncelleriyle değiştirildi; kullanılmayan
+`kronometre2.png` kaldırıldı. Eski dosyalar git geçmişinde duruyor.
 
 ## Dokunma
 
-`app-*.png` dosyaları **telefon** görüntüleridir ve GÜNCELDİR (18 Ağu, Stuxio
-markası, doğru kart düzeni). Sitede kullanılıyorlar.
+`app-*.png` dosyaları **telefon** görüntüleridir (18 Ağu) ve günceldir.
