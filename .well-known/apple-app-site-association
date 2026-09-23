@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["GW7FQDP47G.com.studytime.desktopclient"],
+        "components": [
+          { "/": "/g/*", "comment": "Calisma grubu daveti" }
+        ]
+      }
+    ]
+  }
+}
