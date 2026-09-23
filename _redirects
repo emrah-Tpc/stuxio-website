@@ -1,6 +1,11 @@
 # Çalışma grubu daveti: /g/KOD tek bir sayfayla karşılanır.
 #
-# 200 = yeniden yazma (proxy): adres çubuğunda /g/K7M2QX kalır, içerik /g/index.html'den
+# 200 = yeniden yazma (proxy): adres çubuğunda /g/K7M2QX kalır, içerik /davet/ sayfasından
 # gelir. Kodu sayfadaki betik adresten okur; sunucu tarafı yok.
-# 301/302 kullanılmaz — adres değişirse hem kod kaybolur hem bağlantı çirkinleşir.
-/g/* /g/index.html 200
+#
+# ⚠️ HEDEF NEDEN /g/ ALTINDA DEĞİL: hedef "/g/index.html" yazıldığında Cloudflare dağıtımı
+# REDDEDİYOR (23 Eyl 2026, [code: 100324] "Infinite loop detected"). Sebep: statik varlık
+# katmanı adresten ".html" ve "/index" parçalarını kendisi sadeleştiriyor, sadeleşen adres
+# yine /g/* kuralına düşüyor ve kural kendini tetikliyor. Hedefi /g/ dışına almak döngüyü
+# kırıyor. Sayfayı tekrar /g/ altına taşımayın.
+/g/* /davet/ 200

@@ -9,6 +9,11 @@
   Cache-Control: public, max-age=300
 
 # Davet sayfası kişiye özel bir kod gösteriyor; ara katmanlarda saklanmasın.
+# İki yol da kapsanır: kullanıcının gördüğü /g/KOD ve sayfanın gerçek yeri /davet/.
 /g/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
+
+/davet/*
   Cache-Control: no-store
   X-Robots-Tag: noindex
