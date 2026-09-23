@@ -1,0 +1,19 @@
+# Depoda duran ama SİTEDE işi olmayan dosyalar. Wrangler bunları hiç yüklemez.
+#
+# ⚠️ 23 Eyl 2026'da ölçüldü: dağıtım deponun TAMAMINI varlık olarak yüklüyordu ve
+# stuxio.net/.git/config, /.git/index, /scripts/... adresleri herkese 200 dönüyordu.
+# Depo zaten herkese açık olduğu için o gün sızan yeni bir bilgi yoktu; ama depoya
+# ileride yanlışlıkla eklenecek her dosya (yedek, anahtar, taslak) aynı yoldan
+# siteye de düşerdi ve kimse fark etmezdi.
+#
+# ⚠️ _redirects ve _headers BURAYA YAZILMAZ: onlar zaten varlık olarak sunulmuyor,
+# Cloudflare tarafından OKUNUYOR. Listeye eklenirlerse yönlendirme ve başlık
+# kuralları sessizce çalışmayı bırakır.
+#
+# screenshotss de yazılmaz: index.html oradan görsel çekiyor.
+
+.git
+.gitignore
+.DS_Store
+.wrangler
+scripts
