@@ -1,6 +1,0 @@
-# Çalışma grubu daveti: /g/KOD tek bir sayfayla karşılanır.
-#
-# 200 = yeniden yazma (proxy): adres çubuğunda /g/K7M2QX kalır, içerik /g/index.html'den
-# gelir. Kodu sayfadaki betik adresten okur; sunucu tarafı yok.
-# 301/302 kullanılmaz — adres değişirse hem kod kaybolur hem bağlantı çirkinleşir.
-/g/* /g/index.html 200
