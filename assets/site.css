@@ -817,3 +817,38 @@ details.faq p { color: var(--text-muted); font-size: 0.92rem; margin-top: 0.85re
     .cta-row .btn { width: 100%; }
     .flow-node.is-core { width: 100%; text-align: center; }
 }
+
+/* ── Grup daveti (/g/KOD) ───────────────────────────────────────────────────
+   Sayfanın tek işi kodu okunur biçimde göstermek: kod mono ve seyrek aralıklı,
+   çünkü elle yazılacak (O/0 ve I/1 karışmasın diye alfabede o harfler zaten yok). */
+
+.invite-card {
+    display: grid;
+    justify-items: center;
+    gap: 0.55rem;
+    text-align: center;
+    margin: 1.5rem 0 1.1rem;
+}
+
+.invite-label {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.invite-code {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: clamp(1.7rem, 6.5vw, 2.3rem);
+    font-weight: 600;
+    color: var(--text);
+    /* Harf aralığı son karakterden sonra da boşluk bırakır; sola aynı kadar
+       dolgu vererek ortalamayı düzeltiyoruz. */
+    letter-spacing: 0.3em;
+    padding-left: 0.3em;
+}
+
+.invite-copied { margin: 0; color: var(--ok); font-size: 0.82rem; }
+.invite-note { margin-top: 0.2rem; }

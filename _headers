@@ -1,0 +1,14 @@
+# Apple'ın doğrulama dosyasının UZANTISI YOK; varsayılan olarak application/octet-stream
+# sunulur ve iOS bağlantıyı tanımaz. Doğru içerik tipi ZORUNLU.
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+
+# Android'in doğrulama dosyası .json uzantılı, içerik tipi zaten doğru; yalnız
+# önbellek davranışını belirginleştiriyoruz (parmak izi değişirse hızlı yayılsın).
+/.well-known/assetlinks.json
+  Cache-Control: public, max-age=300
+
+# Davet sayfası kişiye özel bir kod gösteriyor; ara katmanlarda saklanmasın.
+/g/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
