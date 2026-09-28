@@ -10,7 +10,9 @@
 # Cloudflare tarafından OKUNUYOR. Listeye eklenirlerse yönlendirme ve başlık
 # kuralları sessizce çalışmayı bırakır.
 #
-# screenshotss de yazılmaz: index.html oradan görsel çekiyor.
+# screenshotss de yazılmaz. Ana sayfa artık oradan değil assets/ui/ altındaki
+# kırpımlardan görsel çekiyor (bkz. scripts/urun-gorselleri.py), ama bu adreslere
+# dışarıdan (mağaza sayfaları, eski paylaşımlar) bağlantı verilmiş olabilir.
 
 .git
 .gitignore
