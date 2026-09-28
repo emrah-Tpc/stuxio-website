@@ -1,6 +1,12 @@
 # Masaüstü ekran görüntüleri
 
-Sitedeki masaüstü bölümü (`index.html`, "7. Masaüstü") şu dört dosyayı kullanır:
+Site bu klasördeki görselleri **doğrudan kullanmaz**. `scripts/urun-gorselleri.py`
+buradan kırpılmış/küçültülmüş WebP'ler üretir (`assets/ui/`); sayfa onları gösterir.
+Bir görseli yenilediğinde betiği yeniden çalıştır:
+
+    python3 scripts/urun-gorselleri.py
+
+Masaüstü bölümünün (`index.html`, "05 Masaüstü") sekmeleri şu dört dosyadan gelir:
 
 | Dosya | Ekran | Ölçü |
 |---|---|---|
@@ -13,8 +19,11 @@ Sitedeki masaüstü bölümü (`index.html`, "7. Masaüstü") şu dört dosyayı
 
 ## ⚠️ Yenilerken
 
-- **`index.html`'deki `width`/`height` değerlerini de güncelle.** Oranlar farklı;
-  yanlış değer görsel yüklenirken sayfayı zıplatır (CLS).
+- **Betikteki kırpma kutularını kontrol et.** Kaynağın ölçüsü ya da düzeni
+  değişirse kutu yanlış bölgeyi keser. Hero'daki numaralı işaretçilerin konumu
+  (`--x`/`--y`) da kırpıma göre verildi.
+- **`index.html`'deki `width`/`height` değerlerini betiğin çıktısıyla eşleştir.**
+  Yanlış değer görsel yüklenirken sayfayı zıplatır (CLS).
 - **Tek tema seç** — dördü de koyu. Karışık tema ızgarada dağınık durur.
 - **Pencere kaplamalarını dahil etme**: bildirim balonu, Ekran Alıntısı Aracı
   penceresi, açık bildirim paneli vb.
