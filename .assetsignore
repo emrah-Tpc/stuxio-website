@@ -19,3 +19,5 @@
 .DS_Store
 .wrangler
 scripts
+# Mağaza görselleri ve kaynakları (App Store Connect'e elle yüklenir).
+magaza

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!-- Stuxio — App Store ekran görüntüsü şablonu (1290×2796, iPhone 6.9").
+     scripts/magaza-gorselleri.mjs bu sayfayı ?dil=tr&n=1 gibi parametrelerle açıp
+     ekran görüntüsünü alır. Metinlerin TAMAMI aşağıdaki METIN nesnesinde; bir metni
+     değiştirmek için yalnız orayı düzenle ve betiği yeniden çalıştır.
+
+     Görsel dil sitedekiyle aynı (assets/site.css): koyu zemin, dakika çentikli cetvel,
+     mono etiketler, kehribar = "çalışıyor". Yazı tipleri sitenin kendi dosyaları.
+
+     ⚠️ Uygulama ekranları Türkçe arayüzlü (screenshotss/). EN/DE görsellerde başlıklar
+     çevrildi, ekranın içi Türkçe kalıyor. Doğru dilde ekran görüntüsü gelince
+     magaza/ekranlar/ altına DİLE GÖRE ad vererek koyup EKRAN eşlemesini güncelle. -->
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Stuxio — App Store</title>
+<style>
+@font-face { font-family: "Schibsted Grotesk"; font-weight: 400 900; src: url("../assets/fonts/schibsted-grotesk-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "Schibsted Grotesk"; font-weight: 400 900; src: url("../assets/fonts/schibsted-grotesk-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20C0; }
+@font-face { font-family: "JetBrains Mono"; font-weight: 100 800; src: url("../assets/fonts/jetbrains-mono-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "JetBrains Mono"; font-weight: 100 800; src: url("../assets/fonts/jetbrains-mono-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20C0; }
+
+:root {
+    --bg: #08090C;
+    --line: rgba(255, 255, 255, 0.09);
+    --line-2: rgba(255, 255, 255, 0.16);
+    --text: #EEEDEA;
+    --text-2: #A6A8AE;
+    --text-3: #7D818A;
+    --dim: #5F636C;
+    --brand: #3E86FB;
+    --focus: #E8A33D;
+    --ok: #3DBE82;
+    --err: #EF5A5A;
+    --tick: rgba(255, 255, 255, 0.16);
+    --tick-major: rgba(255, 255, 255, 0.34);
+    --mono: "JetBrains Mono", monospace;
+    --pad: 104px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1290px; height: 2796px; overflow: hidden; background: var(--bg); }
+body {
+    position: relative;
+    font-family: "Schibsted Grotesk", sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Üst künye: numara · cetvel · marka */
+.meta {
+    position: absolute; left: var(--pad); right: var(--pad); top: 150px;
+    display: flex; align-items: flex-end; gap: 28px;
+    font: 500 30px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+}
+.meta b { color: var(--text); font-weight: 500; }
+.ticks {
+    flex: 1; height: 18px;
+    background:
+        linear-gradient(var(--line-2), var(--line-2)) left bottom / 100% 2px no-repeat,
+        repeating-linear-gradient(90deg, var(--tick-major) 0 2px, transparent 2px 80px) left bottom / 100% 18px no-repeat,
+        repeating-linear-gradient(90deg, var(--tick) 0 2px, transparent 2px 16px) left bottom / 100% 10px no-repeat;
+}
+
+h1 {
+    position: absolute; left: var(--pad); right: var(--pad); top: 250px;
+    font-size: 128px; line-height: 1.0; letter-spacing: -0.042em; font-weight: 540;
+    text-wrap: balance;
+}
+h1 .dim { color: var(--dim); }
+.sub {
+    position: absolute; left: var(--pad); right: calc(var(--pad) + 60px);
+    font-size: 46px; line-height: 1.38; letter-spacing: -0.012em; color: var(--text-2);
+    text-wrap: pretty;
+}
+
+/* Uygulama ekranı: taklit telefon kasası YOK — kıl kenar ve köşe yuvarlaması. */
+.screen {
+    position: absolute; left: 50%; width: 940px; margin-left: -470px;
+    border-radius: 82px; overflow: hidden;
+    border: 3px solid var(--line-2);
+    background: #000;
+    box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.9);
+}
+.screen img { display: block; width: 100%; height: auto; }
+
+/* Ekranın kenarına oturan durum etiketi */
+.chip {
+    position: absolute; z-index: 2;
+    display: inline-flex; align-items: center; gap: 20px;
+    padding: 24px 32px; border-radius: 18px;
+    background: #0E0F13; border: 2px solid var(--line-2);
+    font: 500 32px/1 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.9);
+    white-space: nowrap;
+}
+.chip i { width: 16px; height: 16px; border-radius: 50%; background: var(--text-3); flex: none; }
+.chip.live { color: var(--focus); border-color: rgba(232, 163, 61, 0.45); }
+.chip.live i { background: var(--focus); box-shadow: 0 0 0 8px rgba(232, 163, 61, 0.16); }
+.chip.ok i { background: var(--ok); }
+.chip.info i { background: var(--brand); }
+
+/* ── Çevrimdışı zaman çizelgesi (ekransız, tamamen yerelleştirilmiş) ───── */
+.tl { position: absolute; left: var(--pad); right: var(--pad); top: 1120px; }
+.tl-phases { position: relative; height: 140px; margin-left: 230px; }
+.tl-phase { position: absolute; top: 0; height: 100%; padding-left: 20px; border-left: 2px solid var(--line-2); font-size: 40px; font-weight: 560; letter-spacing: -0.01em; }
+.tl-phase small { display: block; margin-top: 14px; font: 500 26px/1 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-3); }
+.tl-phase.off { border-left-color: rgba(239, 90, 90, 0.6); }
+.tl-phase.off small { color: #E88080; }
+.tl-row { display: grid; grid-template-columns: 230px 1fr; align-items: center; height: 210px; border-top: 2px solid var(--line); }
+.tl-row > span { font: 500 28px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); }
+.tl-track { position: relative; height: 100%; }
+.tl-track > i { position: absolute; top: 50%; }
+.s-bar { left: 3%; right: 3%; height: 16px; margin-top: -8px; border-radius: 3px; background: var(--text); }
+.cap { position: absolute; top: 26px; font: 500 24px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+.net { height: 4px; margin-top: -2px; background: var(--text-2); }
+.net.off { height: 30px; margin-top: -15px; background: repeating-linear-gradient(135deg, rgba(239, 90, 90, 0.6) 0 3px, transparent 3px 16px); border-block: 2px solid rgba(239, 90, 90, 0.4); }
+.rec { width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 5px; background: var(--brand); }
+.rec.q { background: transparent; border: 3px solid var(--focus); }
+.flush { top: 24px !important; bottom: 24px; width: 3px; background: var(--ok); }
+.axis { margin-left: 230px; height: 26px; border-top: 2px solid var(--line-2);
+    background:
+        repeating-linear-gradient(90deg, var(--tick-major) 0 2px, transparent 2px 10%) left top / 100% 20px no-repeat,
+        repeating-linear-gradient(90deg, var(--tick) 0 2px, transparent 2px 2%) left top / 100% 10px no-repeat; }
+.legend { display: flex; gap: 48px; margin-top: 56px; margin-left: 230px; font-size: 32px; color: var(--text-2); }
+.legend span { display: inline-flex; align-items: center; gap: 16px; }
+.legend i { width: 28px; height: 28px; border-radius: 5px; background: var(--brand); }
+.legend i.q { background: transparent; border: 3px solid var(--focus); }
+
+.facts { position: absolute; left: var(--pad); right: var(--pad); bottom: 230px; border-top: 2px solid var(--line-2); }
+.facts div { display: flex; justify-content: space-between; align-items: baseline; padding: 38px 0; border-bottom: 2px solid var(--line); font-size: 44px; letter-spacing: -0.015em; }
+.facts small { font: 500 28px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+
+.brand { position: absolute; left: var(--pad); bottom: 110px; display: flex; align-items: center; gap: 22px; font-size: 44px; font-weight: 620; letter-spacing: -0.03em; }
+.brand img { width: 60px; height: 60px; border-radius: 15px; }
+</style>
+</head>
+<body>
+<div class="meta"><b data-no></b><span data-kicker></span><i class="ticks"></i><span lang="en">Stuxio</span></div>
+<h1 data-title></h1>
+<p class="sub" data-sub></p>
+<div data-stage></div>
+
+<script>
+/* ── Metinler ────────────────────────────────────────────────────────────────
+   Her slayt: ekran (magaza/ekranlar/ içindeki dosya; yoksa null), başlık (HTML:
+   <span class="dim"> ikinci tonu verir), alt metin, etiket ve etiket türü.
+   Olgular siteyle ve SSS ile aynı; burada yeni bir iddia yazma. */
+const METIN = {
+  tr: {
+    kicker: ["Odak", "Modlar", "Görevler", "İstatistik", "Analiz", "Çevrimdışı"],
+    slides: [
+      { title: 'Çalış, odaklan, <span class="dim">ilerlemeni gör.</span>',
+        sub: "Odak modunda ekranda yalnızca süre kalır.",
+        chip: "Odak modu · çalışıyor" },
+      { title: 'Bir mod seç <span class="dim">ve başlat.</span>',
+        sub: "Serbest, Klasik 25+5, Derin 50+10 ya da Özel. Dördü de ücretsiz planda.",
+        chip: "4 mod · hepsi ücretsiz" },
+      { title: 'Her dakika, <span class="dim">doğru göreve yazılır.</span>',
+        sub: "Kronometreyi bir göreve bağla; geçen süre o göreve ve alana işlenir.",
+        chip: "Göreve bağlı süre" },
+      { title: 'Süre nereye <span class="dim">gitti?</span>',
+        sub: "Çalışma geçmişin; toplam, ortalama ve en yüksek dönem.",
+        chip: "7 gün ücretsiz · 30 gün, 3 ay Premium" },
+      { title: 'En verimli <span class="dim">saatlerini bul.</span>',
+        sub: "Günün hangi aralığında en çok odaklandığını kendi verilerin gösterir.",
+        chip: "Senin seanslarından hesaplanır" },
+      { title: 'Bağlantı kesilir. <span class="dim">Saat durmaz.</span>',
+        sub: "Kronometre internetsiz de doğru sürer. Kayıtlar bağlantı gelince eşitlenir.",
+        tl: { session: "Seans", net: "Bağlantı", rec: "Kayıtlar", start: "Başlat", end: "Bitir",
+              on: "Çevrimiçi", off: "Bağlantı yok", back: "Bağlantı geldi",
+              onS: "Eşitlenir", offS: "Sırada", backS: "Eşitlendi",
+              synced: "Eşitlenmiş kayıt", queued: "Sıradaki kayıt" },
+        facts: [["Reklam", "Yok"], ["İzleme", "Yok"], ["Veriler", "AB · Frankfurt"]] }
+    ]
+  },
+  en: {
+    kicker: ["Focus", "Modes", "Tasks", "Statistics", "Insights", "Offline"],
+    slides: [
+      { title: 'Study, focus, <span class="dim">see your progress.</span>',
+        sub: "In focus mode, only the time stays on screen.",
+        chip: "Focus mode · running" },
+      { title: 'Pick a mode <span class="dim">and start.</span>',
+        sub: "Four timer modes, from open-ended to a deep 50+10. All four are free.",
+        chip: "4 modes · all free" },
+      { title: 'Every minute, <span class="dim">logged to the right task.</span>',
+        sub: "Link the timer to a task and the time is recorded to that task and its subject.",
+        chip: "Time linked to tasks" },
+      { title: 'Where did <span class="dim">the time go?</span>',
+        sub: "Your study history: total, average and your best period.",
+        chip: "7 days free · 30 days, 3 months Premium" },
+      { title: 'Find your most <span class="dim">productive hours.</span>',
+        sub: "Your own sessions show when in the day you focus best.",
+        chip: "Calculated from your sessions" },
+      { title: 'The connection drops. <span class="dim">The clock doesn’t.</span>',
+        sub: "The timer keeps accurate time offline. Records sync once you’re back online.",
+        tl: { session: "Session", net: "Network", rec: "Records", start: "Start", end: "Stop",
+              on: "Online", off: "Offline", back: "Back online",
+              onS: "Syncing", offS: "Queued", backS: "Synced",
+              synced: "Synced record", queued: "Queued record" },
+        facts: [["Ads", "None"], ["Tracking", "None"], ["Data", "EU · Frankfurt"]] }
+    ]
+  },
+  de: {
+    kicker: ["Fokus", "Modi", "Aufgaben", "Statistik", "Analyse", "Offline"],
+    slides: [
+      { title: 'Lernen, fokussieren, <span class="dim">Fortschritt sehen.</span>',
+        sub: "Im Fokusmodus bleibt nur die Zeit auf dem Bildschirm.",
+        chip: "Fokusmodus · läuft" },
+      { title: 'Modus wählen <span class="dim">und starten.</span>',
+        sub: "Vier Timer-Modi, von offen bis zu tiefen 50+10. Alle vier sind kostenlos.",
+        chip: "4 Modi · alle kostenlos" },
+      { title: 'Jede Minute <span class="dim">bei der richtigen Aufgabe.</span>',
+        sub: "Verknüpfe den Timer mit einer Aufgabe – die Zeit wird dort und im Fach erfasst.",
+        chip: "Zeit pro Aufgabe" },
+      { title: 'Wohin ist die <span class="dim">Zeit gegangen?</span>',
+        sub: "Dein Lernverlauf: Summe, Durchschnitt und dein stärkster Zeitraum.",
+        chip: "7 Tage gratis · 30 Tage, 3 Monate Premium" },
+      { title: 'Finde deine <span class="dim">produktivsten Stunden.</span>',
+        sub: "Deine eigenen Sitzungen zeigen, wann du am besten fokussierst.",
+        chip: "Aus deinen Sitzungen berechnet" },
+      { title: 'Die Verbindung bricht ab. <span class="dim">Die Uhr läuft weiter.</span>',
+        sub: "Der Timer läuft offline genau weiter. Einträge werden synchronisiert, sobald du wieder online bist.",
+        tl: { session: "Sitzung", net: "Netz", rec: "Einträge", start: "Start", end: "Stopp",
+              on: "Online", off: "Offline", back: "Wieder online",
+              onS: "Synchron", offS: "Wartend", backS: "Synchronisiert",
+              synced: "Synchronisierter Eintrag", queued: "Wartender Eintrag" },
+        facts: [["Werbung", "Keine"], ["Tracking", "Keines"], ["Daten", "EU · Frankfurt"]] }
+    ]
+  }
+};
+
+/* Slayt → ekran dosyası ve etiket türü. Ekran alt metnin hemen altından başlar,
+   altı tuvalden taşarak kesilir. İlgili bölüm (liste, kart) her ekranda görünür
+   alanda kaldığı için ekran kaydırılmıyor. */
+const DUZEN = [
+  { ekran: "app-odak-tam",   chip: "live" },
+  { ekran: "app-odak",       chip: "ok" },
+  { ekran: "app-gorevler",   chip: "info" },
+  { ekran: "app-istatistik", chip: "info" },
+  { ekran: "app-ipucu",      chip: "info" },
+  { ekran: null }
+];
+
+const q = new URLSearchParams(location.search);
+const dil = METIN[q.get("dil")] ? q.get("dil") : "tr";
+const n = Math.min(Math.max(parseInt(q.get("n") || "1", 10), 1), DUZEN.length);
+const t = METIN[dil], s = t.slides[n - 1], d = DUZEN[n - 1];
+document.documentElement.lang = dil;
+
+document.querySelector("[data-no]").textContent = String(n).padStart(2, "0");
+document.querySelector("[data-kicker]").textContent = t.kicker[n - 1];
+const h1 = document.querySelector("[data-title]");
+h1.innerHTML = s.title;
+const sub = document.querySelector("[data-sub]");
+sub.textContent = s.sub;
+const stage = document.querySelector("[data-stage]");
+
+/* Alt metin başlığın hemen altına: başlık 2–3 satıra kırılabildiği için ölçülür. */
+function place() {
+  const hb = h1.getBoundingClientRect();
+  sub.style.top = (hb.bottom + 48) + "px";
+  return sub.getBoundingClientRect().bottom;
+}
+
+/* Ölçüm yazı tipi YÜKLENDİKTEN sonra: yedek yazı tipiyle ölçülen başlık bir satır
+   kısa çıkıyor, alt metin üç satırlık başlığın üstüne biniyordu (DE, 01 ve 03). */
+Promise.all([
+  document.fonts.load('540 128px "Schibsted Grotesk"', h1.textContent),
+  document.fonts.load('400 46px "Schibsted Grotesk"', s.sub),
+  document.fonts.load('500 32px "JetBrains Mono"', (s.chip || "") + t.kicker.join(""))
+]).then(build);
+
+function build() {
+if (d.ekran) {
+  const subBottom = place();
+  const top = subBottom + 150;
+  const scr = document.createElement("div");
+  scr.className = "screen";
+  scr.style.top = top + "px";
+  const img = new Image();
+  img.src = "ekranlar/" + d.ekran + ".png";
+  img.alt = "";
+  scr.appendChild(img);
+  stage.appendChild(scr);
+  const chip = document.createElement("div");
+  chip.className = "chip " + d.chip;
+  chip.innerHTML = "<i></i>";
+  chip.appendChild(document.createTextNode(s.chip));
+  chip.style.left = "150px";
+  chip.style.top = (top - 60) + "px";
+  stage.appendChild(chip);
+} else {
+  place();
+  const L = s.tl;
+  stage.innerHTML = `
+    <div class="tl">
+      <div class="tl-phases">
+        <div class="tl-phase" style="left:0">${L.on}<small>${L.onS}</small></div>
+        <div class="tl-phase off" style="left:34%">${L.off}<small>${L.offS}</small></div>
+        <div class="tl-phase" style="left:68%">${L.back}<small>${L.backS}</small></div>
+      </div>
+      <div class="tl-row"><span>${L.session}</span><div class="tl-track">
+        <i class="s-bar"></i><span class="cap" style="left:3%">${L.start}</span><span class="cap" style="right:3%">${L.end}</span></div></div>
+      <div class="tl-row"><span>${L.net}</span><div class="tl-track">
+        <i class="net" style="left:0;width:34%"></i><i class="net off" style="left:34%;width:34%"></i><i class="net" style="left:68%;width:32%"></i></div></div>
+      <div class="tl-row"><span>${L.rec}</span><div class="tl-track">
+        <i class="rec" style="left:10%"></i><i class="rec" style="left:20%"></i><i class="rec" style="left:29%"></i>
+        <i class="rec q" style="left:40%"></i><i class="rec q" style="left:48%"></i><i class="rec q" style="left:56%"></i><i class="rec q" style="left:63%"></i>
+        <i class="flush" style="left:68%"></i>
+        <i class="rec" style="left:78%"></i><i class="rec" style="left:88%"></i></div></div>
+      <div class="axis"></div>
+      <div class="legend"><span><i></i>${L.synced}</span><span><i class="q"></i>${L.queued}</span></div>
+    </div>
+    <div class="facts">${s.facts.map(f => `<div><small>${f[0]}</small><span>${f[1]}</span></div>`).join("")}</div>
+    <div class="brand"><img src="../assets/brand/stuxio-icon-192.png" alt="">Stuxio</div>`;
+}
+document.body.dataset.ready = "1";
+}
+</script>
+</body>
+</html>
