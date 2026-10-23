@@ -1,10 +1,13 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.studytime.desktopclient",
       "sha256_cert_fingerprints": [
+        "25:7E:FC:3D:A5:56:DE:D4:3F:F3:A4:01:5A:1B:C9:D8:97:E6:75:5D:6E:01:66:A7:EF:A6:B5:8B:25:39:B2:3E",
         "C0:11:BE:10:9F:D1:DD:31:0D:91:76:3C:63:6C:19:31:4C:F2:96:52:BE:DB:F3:77:A8:CA:31:AA:E8:22:B5:86"
       ]
     }
