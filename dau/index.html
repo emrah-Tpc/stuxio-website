@@ -4,23 +4,148 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>1 ay Premium — Stuxio</title>
-<meta name="description" content="El ilanındaki kodla Stuxio Premium'u 1 ay ücretsiz kullan: adımlar ve koşullar.">
-<!-- Kampanya sayfası: el ilanındaki QR'dan gelinir, arama sonuçlarına girmesi gerekmez.
+<meta name="description" content="El ilanındaki kodla Stuxio Premium'u 1 ay ücretsiz kullan: kod, adımlar ve koşullar.">
+<!-- El ilanındaki QR'ın açtığı sayfa (TR ilan: /dau/, EN ilan: /dau/#en). Arama sonuçlarına girmesi gerekmez.
      Kod 1 Aralık 2026'da sona eriyor (App Store / Play bitiş tarihi). Sonrasında sayfayı
-     KALDIRMA: masalarda kalan ilanlar okunmaya devam eder; "kampanya sona erdi" metnine çevir. -->
+     KALDIRMA: masalarda kalan ilanlar okunmaya devam eder; "teklif sona erdi" metnine çevir.
+     Kod ya da tarih değişirse: iki dildeki metinler + dört mağaza bağlantısı birlikte güncellenmeli
+     (StudyTime deposu docs/baski/a5-el-ilani/uret.py ile aynı değerler). -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#08090C">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Stuxio">
 <meta property="og:title" content="Stuxio Premium — 1 ay bizden">
-<meta property="og:description" content="Kodu kullan, hesabını aç, Premium'u 1 ay ücretsiz dene.">
+<meta property="og:description" content="Kodu mağazada kullan, hesabını aç, Premium'u 1 ay ücretsiz kullan.">
 <meta property="og:image" content="https://stuxio.net/assets/brand/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Davet sayfasıyla aynı: mutlak yollar (sayfa /dau ve /dau/ olarak açılabilir). -->
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/site.css">
+<style>
+/* Yalnız bu sayfaya ait. Belirteçler (renk, yazı, aralık) assets/site.css'ten gelir. */
+.offer { max-width: 680px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) 0 var(--sp-8); }
+.offer [data-lang].is-inline { display: none; }
+.offer [data-lang].is-inline.is-active { display: inline; }
+
+/* ── Kadran: QR'dan gelince oynayan kısa giriş ───────────────────────────── */
+.stage { position: relative; width: min(232px, 62vw); aspect-ratio: 1; margin: 0 auto; }
+.stage svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.stage .crown { transform-box: fill-box; transform-origin: center; }
+.stage .ring-track { stroke: rgba(255, 255, 255, 0.07); }
+.stage .ring { stroke: var(--focus); stroke-dasharray: 527.79; stroke-dashoffset: 0; filter: drop-shadow(0 0 10px rgba(232, 163, 61, 0.35)); }
+.stage .tick { stroke: rgba(255, 255, 255, 0.22); }
+.stage .tick.major { stroke: rgba(255, 255, 255, 0.5); }
+.dial-center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; pointer-events: none; padding-top: 8px; }
+.dial-num { font: 600 clamp(2.6rem, 11vw, 3.3rem)/1 var(--mono); letter-spacing: -0.04em; color: var(--text); font-variant-numeric: tabular-nums; }
+.dial-unit { margin-top: 0.35rem; font: 600 0.78rem/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--focus); }
+.dial-unit .days { display: none; }
+.stage.is-counting .dial-unit .days { display: inline; }
+.stage.is-counting .dial-unit .month { display: none; }
+.premium-chip {
+    position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+    font: 600 0.68rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+    color: #1A1206; background: var(--focus); padding: 0.42rem 0.62rem; border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(232, 163, 61, 0.28); white-space: nowrap;
+}
+.spark { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 2px; opacity: 0; pointer-events: none; }
+
+/* Animasyon yalnız JS ".anim" sınıfını koyunca ve kullanıcı hareketi azaltmadıysa çalışır.
+   JS yoksa ya da hareket azaltılmışsa kadran doğrudan son hâlinde (1 AY · Premium) durur. */
+.anim .crown { animation: crown-press 0.32s var(--ease-io) 0.15s both; }
+.anim .tick { animation: tick-in 0.4s var(--ease) both; animation-delay: calc(0.25s + var(--i) * 9ms); }
+.anim .ring { animation: ring-fill 1.6s var(--ease-io) 0.55s both; }
+.anim .premium-chip { animation: chip-in 0.45s var(--ease) 2.25s both; }
+.anim.is-done .dial-center { animation: pop 0.42s var(--ease); }
+.anim .rise { animation: rise 0.6s var(--ease) both; animation-delay: calc(0.35s + var(--d, 0) * 90ms); }
+.spark.go { animation: spark 0.75s var(--ease) both; }
+
+@keyframes crown-press { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(5px); } }
+@keyframes tick-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ring-fill { from { stroke-dashoffset: 527.79; } to { stroke-dashoffset: 0; } }
+@keyframes chip-in { from { opacity: 0; transform: translate(-50%, 8px) scale(0.9); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+@keyframes pop { 0% { transform: scale(1); } 45% { transform: scale(1.12); } 100% { transform: scale(1); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes spark {
+    0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+    100% { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(0.6); }
+}
+
+/* ── Başlık ─────────────────────────────────────────────────────────────── */
+.intro { text-align: center; margin-top: clamp(28px, 5vw, 40px); }
+.eyebrow { font: 500 var(--fs-meta)/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+.intro h1 { margin-top: 0.85rem; font-size: clamp(2.1rem, 1.4rem + 3vw, 3.1rem); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; }
+.intro h1 em { font-style: normal; color: var(--focus); }
+.intro .lead { margin: 0.9rem auto 0; max-width: 32rem; color: var(--text-2); font-size: var(--fs-lead); line-height: 1.55; }
+
+/* ── Kod kartı ──────────────────────────────────────────────────────────── */
+.code-card {
+    margin-top: var(--sp-6); padding: clamp(20px, 4vw, 28px);
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line-2); border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+.code-label { font: 500 var(--fs-meta)/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); text-align: center; }
+.code-box {
+    margin-top: 0.8rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    padding: 0.7rem 0.7rem 0.7rem 1.1rem; border: 1.5px dashed rgba(232, 163, 61, 0.55); border-radius: 10px;
+    background: var(--focus-soft);
+}
+.code-text { font: 700 clamp(1.35rem, 1rem + 2.4vw, 1.75rem)/1 var(--mono); letter-spacing: 0.14em; color: var(--focus); user-select: all; }
+.copy { flex: none; }
+.copy.is-done { border-color: rgba(61, 190, 130, 0.55); color: var(--ok); }
+.offer-facts { margin-top: 0.9rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.45rem; }
+.offer-fact { font: 500 0.7rem/1 var(--mono); letter-spacing: 0.05em; color: var(--text-2); border: 1px solid var(--line-2); border-radius: 999px; padding: 0.42rem 0.65rem; }
+.offer-stores { margin-top: 1.25rem; display: grid; gap: 0.6rem; }
+.offer-stores .btn { width: 100%; --h: 52px; justify-content: space-between; padding: 0 1.1rem; }
+.offer-stores .btn small { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.02em; opacity: 0.7; }
+.offer-stores .btn span:first-child { display: grid; gap: 0.3rem; text-align: left; }
+.offer-stores .is-mine { order: -1; }
+.secure { margin-top: 1rem; display: flex; gap: 0.6rem; align-items: flex-start; color: var(--text-3); font-size: 0.84rem; line-height: 1.5; }
+.secure svg { flex: none; width: 16px; height: 16px; margin-top: 2px; color: var(--ok); }
+
+/* ── Bölümler ───────────────────────────────────────────────────────────── */
+.block { margin-top: clamp(48px, 9vw, 72px); }
+.block h2 { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.75rem); letter-spacing: -0.03em; font-weight: 600; }
+.block .sub { margin-top: 0.4rem; color: var(--text-2); font-size: 0.95rem; }
+
+.steps { margin-top: var(--sp-5); display: grid; gap: 0.75rem; }
+.step { display: grid; grid-template-columns: 44px 1fr; gap: 0.9rem; padding: 1.05rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.step-no { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand-2); font: 600 0.85rem/1 var(--mono); }
+.step h3 { font-size: 1.02rem; letter-spacing: -0.015em; }
+.step p { margin-top: 0.3rem; color: var(--text-2); font-size: 0.92rem; line-height: 1.55; }
+.step .path { font-family: var(--mono); font-size: 0.8rem; color: var(--text); background: rgba(255, 255, 255, 0.05); border-radius: 5px; padding: 0.1rem 0.35rem; }
+.note { margin-top: 0.85rem; padding: 0.85rem 1rem; border-radius: 10px; border: 1px solid rgba(232, 163, 61, 0.28); background: var(--focus-soft); color: var(--text-2); font-size: 0.88rem; line-height: 1.55; }
+.note strong { color: var(--text); }
+
+.grid { margin-top: var(--sp-5); display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .grid { grid-template-columns: 1fr 1fr; } }
+.tile { padding: 1.05rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; display: grid; grid-template-columns: 34px 1fr; gap: 0.75rem; }
+.tile .ic { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; }
+.tile .ic svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.tile h3 { font-size: 0.98rem; letter-spacing: -0.012em; }
+.tile p { margin-top: 0.25rem; color: var(--text-2); font-size: 0.88rem; line-height: 1.5; }
+.ic.blue { background: var(--brand-soft); color: var(--brand-2); }
+.ic.green { background: rgba(61, 190, 130, 0.12); color: var(--ok); }
+.ic.amber { background: var(--focus-soft); color: var(--focus); }
+.ic.violet { background: rgba(155, 123, 247, 0.14); color: #B39DFA; }
+
+.terms { margin-top: var(--sp-5); padding: 1.25rem 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.terms ul { display: grid; gap: 0.7rem; padding-left: 1.1rem; }
+.terms li { color: var(--text-2); font-size: 0.92rem; line-height: 1.6; }
+.terms li::marker { color: var(--text-3); }
+.terms strong { color: var(--text); font-weight: 600; }
+.terms .cancel { margin-top: 0.5rem; display: grid; gap: 0.35rem; list-style: none; padding: 0; }
+.terms .cancel li { font-family: var(--mono); font-size: 0.78rem; color: var(--text-2); }
+
+.help { margin-top: var(--sp-6); text-align: center; color: var(--text-3); font-size: 0.9rem; line-height: 1.6; }
+.help a { color: var(--text); border-bottom: 1px solid var(--line-2); }
+
+@media (prefers-reduced-motion: reduce) {
+    .anim *, .anim .rise, .spark { animation: none !important; }
+}
+</style>
 </head>
 <body>
 
@@ -29,131 +154,244 @@
     <a class="brand" href="/"><img class="brand-mark" src="/assets/brand/stuxio-icon-96.png" width="32" height="32" alt=""><span>Stuxio</span></a>
     <div class="lang-switch" role="tablist" aria-label="Dil / Language">
       <button role="tab" data-set-lang="tr" aria-selected="true">Türkçe</button>
-      <button role="tab" data-set-lang="en" aria-selected="false">English</button>
+      <button role="tab" data-set-lang="en" aria-selected="false" lang="en">English</button>
     </div>
   </div>
 </header>
 
-<main class="container doc">
+<main class="container">
+<div class="offer" id="offer">
+
+  <!-- Kadran iki dilde ortak; birim yazısı dile göre (bkz. syncInline). -->
+  <div class="stage" id="stage" aria-hidden="true">
+    <svg viewBox="0 0 240 240">
+      <g class="crown">
+        <rect x="108" y="2" width="24" height="11" rx="3.5" fill="#3E86FB"/>
+        <rect x="115.5" y="11" width="9" height="10" rx="2" fill="#3E86FB"/>
+      </g>
+      <g id="ticks"></g>
+      <circle class="ring-track" cx="120" cy="124" r="84" fill="none" stroke-width="10"/>
+      <circle class="ring" cx="120" cy="124" r="84" fill="none" stroke-width="10" stroke-linecap="round" transform="rotate(-90 120 124)"/>
+    </svg>
+    <div class="dial-center">
+      <div class="dial-num" id="dialNum">1</div>
+      <div class="dial-unit">
+        <span class="days"><span data-lang="tr" class="is-inline is-active">gün</span><span data-lang="en" class="is-inline">days</span></span>
+        <span class="month"><span data-lang="tr" class="is-inline is-active">ay</span><span data-lang="en" class="is-inline">month</span></span>
+      </div>
+    </div>
+    <div class="premium-chip" lang="en">Premium</div>
+  </div>
 
 <!-- ══════════════════ TÜRKÇE ══════════════════ -->
 <div data-lang="tr" class="is-active">
-  <h1>1 ay Premium, bizden</h1>
-  <p>El ilanındaki QR'dan geldiysen doğru yerdesin. Aşağıdaki kodla Stuxio Premium'u
-     <strong>1 ay ücretsiz</strong> kullanabilirsin. Kontenjan <strong>ilk 1000 kişi</strong>.</p>
+  <section class="intro rise" style="--d:0">
+    <p class="eyebrow"><span lang="en">Stuxio</span> · El ilanı teklifi</p>
+    <h1>1 ay <em>Premium</em>, bizden.</h1>
+    <p class="lead">El ilanındaki kodla Stuxio Premium'u 1 ay ücretsiz kullan. Kod App Store ve Google Play'de geçerli.</p>
+  </section>
 
-  <div class="card invite-card">
-    <p class="invite-label">Kod</p>
-    <p class="invite-code" data-offer-code>STUXIODAU</p>
-    <button class="btn btn-ghost btn-sm" type="button" data-copy-code>Kodu kopyala</button>
-    <p class="invite-copied" data-copied hidden>Kopyalandı</p>
-    <p class="invite-label">İlk 1000 kişi · Son kullanım: 1 Aralık 2026</p>
-  </div>
+  <section class="code-card rise" style="--d:1">
+    <p class="code-label">Kodun</p>
+    <div class="code-box">
+      <span class="code-text" data-offer-code>STUXIODAU</span>
+      <button class="btn btn-ghost btn-sm copy" type="button" data-copy data-label="Kopyala" data-done="Kopyalandı ✓">Kopyala</button>
+    </div>
+    <div class="offer-facts">
+      <span class="offer-fact">İlk 1000 kişi</span>
+      <span class="offer-fact">Son kullanım: 1 Aralık 2026</span>
+      <span class="offer-fact">Yeni aboneler</span>
+    </div>
+    <div class="offer-stores">
+      <a class="btn btn-ghost" data-store="ios" href="https://apps.apple.com/redeem?ctx=offercodes&amp;id=6806873464&amp;code=STUXIODAU" target="_blank" rel="noopener">
+        <span><small>iPhone</small>App Store'da kodu kullan</span><span class="arr">→</span></a>
+      <a class="btn btn-ghost" data-store="android" href="https://play.google.com/redeem?code=STUXIODAU" target="_blank" rel="noopener">
+        <span><small>Android</small>Google Play'de kodu kullan</span><span class="arr">→</span></a>
+    </div>
+    <p class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+      <span>Mağaza kodu kendisi girer. Ödeme ve iptal tamamen App Store ya da Google Play'de; kart bilgin Stuxio'ya hiç gelmez.</span>
+    </p>
+  </section>
 
-  <div class="cta-row">
-    <a class="btn btn-primary" href="https://apps.apple.com/redeem?ctx=offercodes&amp;id=6806873464&amp;code=STUXIODAU" target="_blank" rel="noopener">iPhone: App Store'da kullan</a>
-    <a class="btn btn-ghost" href="https://play.google.com/redeem?code=STUXIODAU" target="_blank" rel="noopener">Android: Google Play'de kullan</a>
-  </div>
+  <section class="block rise" style="--d:2">
+    <h2>3 adımda Premium</h2>
+    <div class="steps">
+      <div class="step"><div class="step-no">01</div><div>
+        <h3>Kodu kullan</h3>
+        <p>Yukarıdan telefonuna uygun düğmeye dokun; mağaza kodu girer. Stuxio yüklü değilse indir; kodu kullandıktan sonra uygulamayı ayrıca arayıp indirmen de olur.</p>
+      </div></div>
+      <div class="step"><div class="step-no">02</div><div>
+        <h3>Hesabını aç</h3>
+        <p>Stuxio'yu aç; e-posta, Google ya da Apple ile kayıt ol veya giriş yap.</p>
+      </div></div>
+      <div class="step"><div class="step-no">03</div><div>
+        <h3>Premium'u etkinleştir</h3>
+        <p>Uygulamada <span class="path">Ayarlar → Premium Üyelik → Satın Alımları Geri Yükle</span>'ye dokun. Premium hesabına hemen tanımlanır; iPhone App Store şifreni sorabilir.</p>
+      </div></div>
+    </div>
+    <p class="note"><strong>Android'de:</strong> kodu kullandıktan sonra adımları <strong>3 gün içinde</strong> tamamla. Google, uygulamada etkinleşmeyen aboneliği bu sürenin sonunda iptal ediyor.</p>
+  </section>
 
-  <h2>3 adımda</h2>
-  <ol>
-    <li><strong>Kodu kullan.</strong> Telefonuna göre yukarıdaki düğmeye dokun; mağaza kodu kendisi girer.
-        Stuxio yüklü değilse mağazadan indir; kod kullanıldıktan sonra uygulamayı ayrıca arayıp indirmen de olur.</li>
-    <li><strong>Stuxio'yu aç</strong>, hesabını oluştur ya da giriş yap.</li>
-    <li>Uygulamada <strong>Ayarlar → Premium Üyelik → Satın Alımları Geri Yükle</strong>'ye dokun.
-        Premium hesabına hemen tanımlanır. iPhone App Store şifreni sorabilir.</li>
-  </ol>
-  <p class="dim">Android'de kodu kullandıktan sonra <strong>3 gün içinde</strong> Stuxio'yu açıp giriş yap.
-     Google, bu sürede uygulamada etkinleşmeyen aboneliği iptal ediyor.</p>
+  <section class="block rise" style="--d:3">
+    <h2>Premium'da neler var?</h2>
+    <p class="sub">Ücretsiz plan zaten kalıcı. Premium ise sınırları kaldırıyor.</p>
+    <div class="grid">
+      <div class="tile"><div class="ic blue"><svg viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 2-2h12v14H7a2 2 0 0 0-2 2zM5 19a2 2 0 0 0 2 2h12"/></svg></div><div>
+        <h3>Sınırsız ders ve görev</h3><p>Ücretsizde 3 ders alanı ve alan başına 7 görev var; Premium'da sınır yok.</p></div></div>
+      <div class="tile"><div class="ic green"><svg viewBox="0 0 24 24"><path d="M5 20v-7M10 20V6M15 20v-9M20 20V9"/></svg></div><div>
+        <h3>30 gün ve 3 ay istatistik</h3><p>Ücretsizde 7 günlük aralık; Premium'da 30 gün ve 3 ay.</p></div></div>
+      <div class="tile"><div class="ic amber"><svg viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0"/><path d="M3 3l18 18"/></svg></div><div>
+        <h3>İnternetsiz tam düzenleme</h3><p>Bağlantı yokken de ders ve görev ekle, düzenle.</p></div></div>
+      <div class="tile"><div class="ic violet"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div>
+        <h3>PDF Odak Raporu</h3><p>Seçtiğin aralığı belge olarak dışa aktar.</p></div></div>
+      <div class="tile"><div class="ic blue"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><div>
+        <h3>Windows masaüstü</h3><p>Telefonda başlattığın seans masaüstünde de görünür.</p></div></div>
+    </div>
+  </section>
 
-  <h2>Premium'da neler var?</h2>
-  <ul>
-    <li>Sınırsız ders alanı ve görev.</li>
-    <li>30 günlük ve 3 aylık istatistik aralıkları.</li>
-    <li>İnternet yokken de tam düzenleme.</li>
-    <li>PDF Odak Raporu.</li>
-    <li>Windows masaüstü uygulaması.</li>
-  </ul>
+  <section class="block rise" style="--d:4">
+    <h2>Gönül rahatlığıyla</h2>
+    <div class="grid">
+      <div class="tile"><div class="ic green"><svg viewBox="0 0 24 24"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div><div>
+        <h3>Ödeme mağazada</h3><p>Kodu Apple ve Google işler. Kart bilgin Stuxio'ya hiç gelmez.</p></div></div>
+      <div class="tile"><div class="ic blue"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div>
+        <h3>Reklam yok, verin satılmaz</h3><p>Reklam ağı ya da davranışsal izleme kullanılmaz.</p></div></div>
+      <div class="tile"><div class="ic violet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><div>
+        <h3>Verilerin AB'de</h3><p>Hesap ve çalışma verilerin Frankfurt'taki bir veritabanında tutulur.</p></div></div>
+      <div class="tile"><div class="ic amber"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></div><div>
+        <h3>Bağımsız geliştirici</h3><p>Stuxio bağımsız geliştiriliyor; destek e-postalarını geliştiren kişi okuyor.</p></div></div>
+    </div>
+  </section>
 
-  <h2>Koşullar</h2>
-  <ul>
-    <li>Kod <strong>1 Aralık 2026</strong> tarihine kadar kullanılabilir. Bu tarihe kadar kodu kullanan herkes tam 1 ay alır.</li>
-    <li>Kontenjan <strong>ilk 1000 kişi</strong>. Kontenjan dolarsa kod 1 Aralık'tan önce de kapanır;
-        mağaza o zaman kodun geçersiz olduğunu söyler.</li>
-    <li>Teklif <strong>yeni aboneler</strong> içindir; her mağaza hesabı kodu bir kez kullanabilir.</li>
-    <li>1 ayın sonunda, <strong>iptal etmezsen</strong> aylık Premium aboneliği olarak <strong>ücretli</strong>
-        devam eder. Ücret, kodu kullanırken mağaza ekranında yazar.</li>
-    <li>Ücret alınmasın istiyorsan ücretsiz ay bitmeden <strong>en az 24 saat önce</strong> iptal et:
+  <section class="block rise" style="--d:5">
+    <h2>Koşullar</h2>
+    <div class="terms">
       <ul>
-        <li>iPhone: Ayarlar → adın → Abonelikler → Stuxio → Aboneliği İptal Et</li>
-        <li>Android: Google Play → profil → Ödemeler ve abonelikler → Abonelikler → Stuxio → İptal et</li>
+        <li>Kod <strong>1 Aralık 2026</strong> tarihine kadar kullanılabilir. Bu tarihe kadar kodu kullanan herkes tam 1 ay alır.</li>
+        <li>Kontenjan <strong>ilk 1000 kişi</strong>. Kontenjan dolarsa kod 1 Aralık'tan önce de kapanır; mağaza o zaman kodun geçersiz olduğunu söyler.</li>
+        <li>Teklif <strong>yeni aboneler</strong> içindir; her mağaza hesabı kodu bir kez kullanabilir.</li>
+        <li>1 ayın sonunda, <strong>iptal etmezsen</strong> aylık Premium aboneliği olarak <strong>ücretli</strong> devam eder. Ücret, kodu kullanırken mağaza ekranında yazar.</li>
+        <li>Ücret alınmasın istiyorsan ücretsiz ay bitmeden <strong>en az 24 saat önce</strong> iptal et:
+          <ul class="cancel">
+            <li>iPhone: Ayarlar → adın → Abonelikler → Stuxio → Aboneliği İptal Et</li>
+            <li>Android: Google Play → profil → Ödemeler ve abonelikler → Abonelikler → Stuxio → İptal et</li>
+          </ul>
+        </li>
+        <li>Ücretsiz plan her zaman kalıcıdır. Premium bittiğinde tuttuğun çalışma süreleri silinmez.</li>
       </ul>
-    </li>
-    <li>Ücretsiz plan her zaman kalıcıdır. Premium bittiğinde tuttuğun çalışma süreleri silinmez.</li>
-  </ul>
-  <p class="dim">Takıldığın bir yer olursa <a href="/destek">Destek</a> sayfasından ya da
-     support@stuxio.net adresinden yaz; e-postaları geliştiren kişi okuyor.</p>
+    </div>
+  </section>
+
+  <p class="help rise" style="--d:6">Takıldığın bir yer olursa <a href="mailto:support@stuxio.net">support@stuxio.net</a> adresine
+     ya da <a href="/destek">Destek</a> sayfasından yaz.</p>
 </div>
 
 <!-- ══════════════════ ENGLISH ══════════════════ -->
 <div data-lang="en">
-  <h1>1 month of Premium, on us</h1>
-  <p>If you scanned the QR on our flyer, you're in the right place. Use the code below to get
-     Stuxio Premium <strong>free for 1 month</strong>. Available to the <strong>first 1,000 people</strong>.</p>
+  <section class="intro rise" style="--d:0">
+    <p class="eyebrow">Stuxio · Flyer offer</p>
+    <h1>1 month of <em>Premium</em>, on us.</h1>
+    <p class="lead">Use the code from our flyer to get Stuxio Premium free for 1 month. Works on the App Store and Google Play.</p>
+  </section>
 
-  <div class="card invite-card">
-    <p class="invite-label">Code</p>
-    <p class="invite-code" data-offer-code>STUXIODAU</p>
-    <button class="btn btn-ghost btn-sm" type="button" data-copy-code>Copy code</button>
-    <p class="invite-copied" data-copied hidden>Copied</p>
-    <p class="invite-label">First 1,000 people · Redeem by 1 December 2026</p>
-  </div>
+  <section class="code-card rise" style="--d:1">
+    <p class="code-label">Your code</p>
+    <div class="code-box">
+      <span class="code-text" data-offer-code>STUXIODAU</span>
+      <button class="btn btn-ghost btn-sm copy" type="button" data-copy data-label="Copy" data-done="Copied ✓">Copy</button>
+    </div>
+    <div class="offer-facts">
+      <span class="offer-fact">First 1,000 people</span>
+      <span class="offer-fact">Redeem by 1 December 2026</span>
+      <span class="offer-fact">New subscribers</span>
+    </div>
+    <div class="offer-stores">
+      <a class="btn btn-ghost" data-store="ios" href="https://apps.apple.com/redeem?ctx=offercodes&amp;id=6806873464&amp;code=STUXIODAU" target="_blank" rel="noopener">
+        <span><small>iPhone</small>Redeem on the App Store</span><span class="arr">→</span></a>
+      <a class="btn btn-ghost" data-store="android" href="https://play.google.com/redeem?code=STUXIODAU" target="_blank" rel="noopener">
+        <span><small>Android</small>Redeem on Google Play</span><span class="arr">→</span></a>
+    </div>
+    <p class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+      <span>The store fills in the code for you. Payment and cancellation happen entirely in the App Store or Google Play; your card details never reach Stuxio.</span>
+    </p>
+  </section>
 
-  <div class="cta-row">
-    <a class="btn btn-primary" href="https://apps.apple.com/redeem?ctx=offercodes&amp;id=6806873464&amp;code=STUXIODAU" target="_blank" rel="noopener">iPhone: redeem on the App Store</a>
-    <a class="btn btn-ghost" href="https://play.google.com/redeem?code=STUXIODAU" target="_blank" rel="noopener">Android: redeem on Google Play</a>
-  </div>
+  <section class="block rise" style="--d:2">
+    <h2>Premium in three steps</h2>
+    <div class="steps">
+      <div class="step"><div class="step-no">01</div><div>
+        <h3>Redeem the code</h3>
+        <p>Tap the button for your phone above; the store fills in the code. If Stuxio isn't installed, download it; installing it separately after redeeming works too.</p>
+      </div></div>
+      <div class="step"><div class="step-no">02</div><div>
+        <h3>Create your account</h3>
+        <p>Open Stuxio and sign up or sign in with email, Google or Apple.</p>
+      </div></div>
+      <div class="step"><div class="step-no">03</div><div>
+        <h3>Turn on Premium</h3>
+        <p>In the app, tap <span class="path">Settings → Premium Membership → Restore Purchases</span>. Premium is added to your account right away; your iPhone may ask for your App Store password.</p>
+      </div></div>
+    </div>
+    <p class="note"><strong>On Android:</strong> finish these steps <strong>within 3 days</strong> of redeeming. Google cancels subscriptions that aren't activated in the app within that time.</p>
+  </section>
 
-  <h2>Three steps</h2>
-  <ol>
-    <li><strong>Redeem the code.</strong> Tap the button for your phone; the store fills in the code for you.
-        If Stuxio isn't installed yet, download it from the store; installing it separately after redeeming works too.</li>
-    <li><strong>Open Stuxio</strong> and create your account or sign in.</li>
-    <li>In the app, tap <strong>Settings → Premium Membership → Restore Purchases</strong>.
-        Premium is added to your account right away. Your iPhone may ask for your App Store password.</li>
-  </ol>
-  <p class="dim">On Android, open Stuxio and sign in <strong>within 3 days</strong> of redeeming.
-     Google cancels subscriptions that aren't activated in the app within that time.</p>
+  <section class="block rise" style="--d:3">
+    <h2>What Premium adds</h2>
+    <p class="sub">The free plan is yours to keep. Premium removes the limits.</p>
+    <div class="grid">
+      <div class="tile"><div class="ic blue"><svg viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 2-2h12v14H7a2 2 0 0 0-2 2zM5 19a2 2 0 0 0 2 2h12"/></svg></div><div>
+        <h3>Unlimited subjects and tasks</h3><p>The free plan has 3 subjects with 7 tasks each; Premium has no limit.</p></div></div>
+      <div class="tile"><div class="ic green"><svg viewBox="0 0 24 24"><path d="M5 20v-7M10 20V6M15 20v-9M20 20V9"/></svg></div><div>
+        <h3>30-day and 3-month stats</h3><p>The free plan shows 7 days; Premium adds 30 days and 3 months.</p></div></div>
+      <div class="tile"><div class="ic amber"><svg viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0"/><path d="M3 3l18 18"/></svg></div><div>
+        <h3>Full editing offline</h3><p>Add and edit subjects and tasks without a connection.</p></div></div>
+      <div class="tile"><div class="ic violet"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div>
+        <h3>PDF Focus Report</h3><p>Export any range as a document.</p></div></div>
+      <div class="tile"><div class="ic blue"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><div>
+        <h3>Windows desktop app</h3><p>A session started on your phone shows up on your desktop too.</p></div></div>
+    </div>
+  </section>
 
-  <h2>What Premium adds</h2>
-  <ul>
-    <li>Unlimited subjects and tasks.</li>
-    <li>30-day and 3-month stats ranges.</li>
-    <li>Full editing while offline.</li>
-    <li>PDF Focus Report.</li>
-    <li>The Windows desktop app.</li>
-  </ul>
+  <section class="block rise" style="--d:4">
+    <h2>Peace of mind</h2>
+    <div class="grid">
+      <div class="tile"><div class="ic green"><svg viewBox="0 0 24 24"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div><div>
+        <h3>Payment stays in the store</h3><p>Apple and Google handle the code. Your card details never reach Stuxio.</p></div></div>
+      <div class="tile"><div class="ic blue"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div>
+        <h3>No ads, data never sold</h3><p>No ad networks and no behavioural tracking.</p></div></div>
+      <div class="tile"><div class="ic violet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><div>
+        <h3>Your data stays in the EU</h3><p>Account and study data are stored in a database in Frankfurt.</p></div></div>
+      <div class="tile"><div class="ic amber"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></div><div>
+        <h3>Independent developer</h3><p>Stuxio is built independently; support emails are read by the developer.</p></div></div>
+    </div>
+  </section>
 
-  <h2>Terms</h2>
-  <ul>
-    <li>The code can be redeemed until <strong>1 December 2026</strong>. Everyone who redeems by then gets the full month.</li>
-    <li>Limited to the <strong>first 1,000 people</strong>. Once that limit is reached the code closes before
-        1 December, and the store will say the code is no longer valid.</li>
-    <li>The offer is for <strong>new subscribers</strong>; each store account can redeem it once.</li>
-    <li>After 1 month, <strong>unless you cancel</strong>, it continues as a <strong>paid</strong> monthly
-        Premium subscription. The price is shown in the store when you redeem.</li>
-    <li>To avoid being charged, cancel <strong>at least 24 hours</strong> before the free month ends:
+  <section class="block rise" style="--d:5">
+    <h2>Terms</h2>
+    <div class="terms">
       <ul>
-        <li>iPhone: Settings → your name → Subscriptions → Stuxio → Cancel Subscription</li>
-        <li>Android: Google Play → profile → Payments &amp; subscriptions → Subscriptions → Stuxio → Cancel</li>
+        <li>The code can be redeemed until <strong>1 December 2026</strong>. Everyone who redeems by then gets the full month.</li>
+        <li>Limited to the <strong>first 1,000 people</strong>. Once that limit is reached the code closes before 1 December, and the store will say the code is no longer valid.</li>
+        <li>The offer is for <strong>new subscribers</strong>; each store account can redeem it once.</li>
+        <li>After 1 month, <strong>unless you cancel</strong>, it continues as a <strong>paid</strong> monthly Premium subscription. The price is shown in the store when you redeem.</li>
+        <li>To avoid being charged, cancel <strong>at least 24 hours</strong> before the free month ends:
+          <ul class="cancel">
+            <li>iPhone: Settings → your name → Subscriptions → Stuxio → Cancel Subscription</li>
+            <li>Android: Google Play → profile → Payments &amp; subscriptions → Subscriptions → Stuxio → Cancel</li>
+          </ul>
+        </li>
+        <li>The free plan stays free with no time limit. When Premium ends, your tracked study time is kept.</li>
       </ul>
-    </li>
-    <li>The free plan stays free with no time limit. When Premium ends, your tracked study time is kept.</li>
-  </ul>
-  <p class="dim">Stuck? Write to us via the <a href="/destek">Support</a> page or at
-     support@stuxio.net. Emails are read by the developer.</p>
+    </div>
+  </section>
+
+  <p class="help rise" style="--d:6">Stuck? Email <a href="mailto:support@stuxio.net">support@stuxio.net</a>
+     or write to us via the <a href="/destek">Support</a> page.</p>
 </div>
 
+</div>
 </main>
 
 <footer class="site-footer">
@@ -171,19 +409,115 @@
 
 <script src="/assets/lang.js"></script>
 <script>
-/* Kodu panoya kopyalar. Kod sayfada sabit yazılı (el ilanındakiyle aynı); değişirse
-   iki dildeki data-offer-code metinlerini ve dört mağaza bağlantısını birlikte güncelle. */
 (function () {
     "use strict";
-    document.querySelectorAll("[data-copy-code]").forEach(function (btn) {
+
+    var NS = "http://www.w3.org/2000/svg";
+    var stage = document.getElementById("stage");
+    var offer = document.getElementById("offer");
+    var num = document.getElementById("dialNum");
+
+    // Kadranın 60 dakika çentiği; her 5'te bir uzun. Animasyon olsun olmasın çizilir.
+    var ticks = document.getElementById("ticks");
+    for (var i = 0; i < 60; i++) {
+        var major = i % 5 === 0;
+        var a = (i / 60) * 2 * Math.PI - Math.PI / 2;
+        var r1 = 108, r2 = major ? 97 : 102;
+        var l = document.createElementNS(NS, "line");
+        l.setAttribute("x1", 120 + r1 * Math.cos(a)); l.setAttribute("y1", 124 + r1 * Math.sin(a));
+        l.setAttribute("x2", 120 + r2 * Math.cos(a)); l.setAttribute("y2", 124 + r2 * Math.sin(a));
+        l.setAttribute("stroke-width", major ? 2.2 : 1.3);
+        l.setAttribute("stroke-linecap", "round");
+        l.setAttribute("class", major ? "tick major" : "tick");
+        l.style.setProperty("--i", i);
+        ticks.appendChild(l);
+    }
+
+    // Kadrandaki küçük dil etiketleri lang.js'in blok düzenine katılmıyor; <html lang> ile eşitlenir.
+    function syncInline() {
+        var lang = document.documentElement.getAttribute("lang") === "en" ? "en" : "tr";
+        stage.querySelectorAll("[data-lang]").forEach(function (el) {
+            el.classList.toggle("is-active", el.getAttribute("data-lang") === lang);
+        });
+    }
+    syncInline();
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+        b.addEventListener("click", function () { setTimeout(syncInline, 0); });
+    });
+
+    // Telefonun mağazası öne alınır ve birincil düğme olur; masaüstünde iki düğme eşit kalır.
+    var ua = navigator.userAgent || "";
+    var mine = (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) ? "ios"
+             : /Android/i.test(ua) ? "android" : "";
+    if (mine) {
+        document.querySelectorAll('[data-store="' + mine + '"]').forEach(function (btn) {
+            btn.classList.add("is-mine", "btn-primary");
+            btn.classList.remove("btn-ghost");
+        });
+    }
+
+    // Kopyala
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
         btn.addEventListener("click", function () {
             var code = btn.parentElement.querySelector("[data-offer-code]").textContent.trim();
-            navigator.clipboard.writeText(code).then(function () {
-                var note = btn.parentElement.querySelector("[data-copied]");
-                if (note) { note.hidden = false; setTimeout(function () { note.hidden = true; }, 2000); }
-            }).catch(function () { /* pano kapalıysa kod zaten ekranda yazıyor */ });
+            function done() {
+                btn.textContent = btn.getAttribute("data-done");
+                btn.classList.add("is-done");
+                setTimeout(function () {
+                    btn.textContent = btn.getAttribute("data-label");
+                    btn.classList.remove("is-done");
+                }, 2000);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(done).catch(function () { /* kod ekranda seçilebilir */ });
+            }
         });
     });
+
+    // Giriş animasyonu: hareket azaltılmışsa hiç başlamaz, kadran son hâlinde (1 ay · Premium) kalır.
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
+    offer.classList.add("anim");
+    stage.classList.add("anim", "is-counting");
+    num.textContent = "0";
+
+    var DELAY = 550, DURATION = 1600, start = null;
+    function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function frame(now) {
+        if (start === null) start = now;
+        var t = Math.min(1, Math.max(0, (now - start - DELAY) / DURATION));
+        num.textContent = String(Math.round(ease(t) * 30));
+        if (t < 1) { requestAnimationFrame(frame); return; }
+        setTimeout(finish, 120);
+    }
+    requestAnimationFrame(frame);
+
+    function finish() {
+        stage.classList.remove("is-counting");
+        stage.classList.add("is-done");
+        num.textContent = "1";
+        burst();
+    }
+
+    // Küçük kıvılcımlar: odak turuncusu, marka mavisi, başarı yeşili.
+    function burst() {
+        var colors = ["#E8A33D", "#3E86FB", "#3DBE82", "#E8A33D", "#6AA3FF"];
+        for (var k = 0; k < 14; k++) {
+            var s = document.createElement("span");
+            s.className = "spark";
+            var ang = (k / 14) * 2 * Math.PI + Math.random() * 0.3;
+            var dist = 92 + Math.random() * 40;
+            s.style.background = colors[k % colors.length];
+            s.style.setProperty("--x", Math.round(Math.cos(ang) * dist) + "px");
+            s.style.setProperty("--y", Math.round(Math.sin(ang) * dist) + "px");
+            s.style.setProperty("--r", Math.round(Math.random() * 240 - 120) + "deg");
+            s.style.animationDelay = Math.round(Math.random() * 80) + "ms";
+            stage.appendChild(s);
+            s.classList.add("go");
+            s.addEventListener("animationend", function () { this.remove(); });
+        }
+    }
 })();
 </script>
 </body>
